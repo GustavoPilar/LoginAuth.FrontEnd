@@ -9,8 +9,14 @@ import { Settings } from "../../core/settings";
 })
 export class LoginComponent implements OnInit {
 
+  //#region Fields
+  
+  /** Formulário de login */
   public form: FormGroup;
 
+  //#endregion
+
+  //#region Constructor
   constructor(
     private formBuilder: FormBuilder
   ) {
@@ -21,8 +27,11 @@ export class LoginComponent implements OnInit {
 
     Settings.showMenu = false;
   }
+  //#endregion
 
+  //#region Members 'On' :: OnInit
   public ngOnInit(): void {
   }
+  //#endregion
 
 }
