@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Settings } from "../../core/settings";
 
 @Component({
   selector: "app-login",
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
       email: [null, Validators.required],
       password: [null, Validators.required]
     });
+
+    Settings.showMenu = false;
   }
 
   public ngOnInit(): void {

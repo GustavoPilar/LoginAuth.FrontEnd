@@ -1,1 +1,10 @@
+
+@if (settings.showMenu) {
+  <app-menu></app-menu>
+}
+
 <router-outlet />
+
+@if (settings.showCreatedBy) {
+  <app-created-by></app-created-by>
+}

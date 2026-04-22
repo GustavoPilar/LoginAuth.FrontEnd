@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Settings } from "../../core/settings";
 
 @Component({
   selector: "app-register",
@@ -20,6 +21,8 @@ export class RegisterComponent implements OnInit {
       password: [null, Validators.required],
       confirmPassword: [null, Validators.required]
     });
+
+    Settings.showMenu = false;
   }
 
   public ngOnInit(): void {

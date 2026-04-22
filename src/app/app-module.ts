@@ -6,26 +6,30 @@ import { App } from './app';
 import { LoginComponent } from './pages/login/login.component';
 import { providePrimeNG } from 'primeng/config';
 import Aura from "@primeuix/themes/aura";
+import { RegisterComponent } from './pages/register/register.component';
+import { ComponentsModule } from './components/components.module';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DividerModule } from 'primeng/divider';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
-import { DividerModule } from 'primeng/divider';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputIconModule } from 'primeng/inputicon';
-import { IconFieldModule } from 'primeng/iconfield';
-import { CheckboxModule } from 'primeng/checkbox';
-import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     App,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ComponentsModule,
     ReactiveFormsModule,
 
     InputTextModule,
@@ -35,7 +39,7 @@ import { RegisterComponent } from './pages/register/register.component';
     FloatLabelModule,
     IconFieldModule,
     InputIconModule,
-    CheckboxModule
+    CheckboxModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

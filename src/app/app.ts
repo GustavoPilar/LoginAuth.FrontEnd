@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { Settings } from './core/settings';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,16 @@ import { Component, signal } from '@angular/core';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('LoginAuth.FrontEnd');
+
+  //#region Fields
+  settings = Settings;
+  //#endregion
+
+  //#region Constructor
+  constructor(
+
+  ) {
+  }
+  //#endregion
+
 }
