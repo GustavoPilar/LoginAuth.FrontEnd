@@ -1,0 +1,85 @@
+<div class="fluid p-2">
+
+  <!-- <div class="bg-red-100 m-auto flex justify-content-center align-items-center" style="width: 10rem; height: 10rem; border-radius: 50%;">
+    <app-logo></app-logo>
+  </div> -->
+  <!-- <app-logo></app-logo> -->  <div class="-red-100 m-auto flex justify-content-center align-items-center" style="width: 10rem; height: 10rem; border-radius: 50%;">
+    <h1>Logo</h1>
+  </div>
+
+  <div class="fluid p-2 w-10 m-auto my-3 text-center" >
+    <h3>Crie sua conta</h3>
+    <p>Preencha os dados para se cadastrar</p>
+  </div>
+
+  <div class="fluid p-2 w-10 max-w-30rem m-auto">
+    <form [formGroup]="form">
+      <div class="grid">
+        <div class="field col-12">
+          <p-floatlabel variant="over">
+            <p-iconfield>
+              <p-inputicon class="pi pi-user"></p-inputicon>
+              <input type="text" pInputText id="fullName" formControlName="fullName" fluid>
+            </p-iconfield>
+            <label for="fullName">Nome completo</label>
+          </p-floatlabel>
+        </div>
+        <div class="field col-12">
+          <p-floatlabel variant="over">
+            <p-iconfield>
+              <p-inputicon class="pi pi-tag"></p-inputicon>
+              <input type="text" pInputText id="userName" formControlName="userName" fluid>
+            </p-iconfield>
+            <label for="userName">Nome de usuário</label>
+          </p-floatlabel>
+        </div>
+        <div class="field col-12">
+          <p-floatlabel variant="over">
+            <p-iconfield>
+              <p-inputicon class="pi pi-at"></p-inputicon>
+              <input type="text" pInputText id="email" formControlName="email" fluid>
+            </p-iconfield>
+            <label for="email">E-mail</label>
+          </p-floatlabel>
+        </div>
+        <div class="field col-12">
+          <p-floatlabel variant="over">
+            <p-iconfield>
+              <p-inputicon class="pi pi-lock"></p-inputicon>
+              <p-password id="password" inputId="password" formControlName="password" fluid [feedback]="false" showClear toggleMask></p-password>
+            </p-iconfield>
+            <label for="password">Usuário</label>
+          </p-floatlabel>
+        </div>
+        <div class="field col-12">
+          <p-floatlabel variant="over">
+            <p-iconfield>
+              <p-inputicon class="pi pi-lock"></p-inputicon>
+              <p-password id="confirmPassword" inputId="confirmPassword" formControlName="confirmPassword" fluid [feedback]="false" showClear toggleMask></p-password>
+            </p-iconfield>
+            <label for="confirmPassword">Confirmar senha</label>
+          </p-floatlabel>
+        </div>
+        <div class="field col-12 flex justify-content-between align-items-center text-sm">
+          <div class="flex gap-2">
+            <p-checkbox id="terms" inputId="terms" [binary]="true"></p-checkbox>
+            <label for="terms">Li e aceito os <a href="#" class="no-underline text-primary">Termos de Uso</a> e <a href="#" class="no-underline text-primary">Política de Privacidade</a></label>
+          </div>
+        </div>
+        <div class="field col-12">
+          <p-button label="Já tenho uma conta" fluid size="large" severity="primary"></p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="-yefluid w-10 max-w-30rem m-auto">
+    <p-divider [align]="'center'">OU</p-divider>
+  </div>
+
+  <div class="-orfluid p-2 w-10 max-w-30rem m-auto">
+    <p-button label="Já tenho uma conta" fluid size="large" routerLink="/login" severity="info"></p-button>
+  </div>
+
+
+</div>
