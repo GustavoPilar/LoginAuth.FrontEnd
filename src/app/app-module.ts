@@ -16,7 +16,6 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RegisterComponent } from './pages/register/register.component';
-import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { ComponentsModule } from './components/components.module';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    ComponentsModule,
 
     InputTextModule,
     PasswordModule,

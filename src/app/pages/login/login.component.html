@@ -1,27 +1,27 @@
 <div class="fluid p-2">
 
-  <div class="-red-100 m-auto flex justify-content-center align-items-center" style="width: 10rem; height: 10rem; border-radius: 50%;">
-    <h1>Logo</h1>
+  <div class="w-full m-auto flex justify-content-center align-items-center my-3" style="height: 5rem;">
+    <h1>Login Auth <i class="pi pi-lock text-3xl"></i></h1>
   </div>
 
-  <div class="-blue-100 fluid p-2 w-10 m-auto my-4 text-center" >
+  <div class="fluid p-2 w-10 m-auto my-4 text-center" >
     <h3>Bem vindo (a)</h3>
     <p>Acesse sua conta para continuar</p>
   </div>
 
-  <div class="-green-100 fluid p-2 w-10 max-w-30rem m-auto">
+  <div class="fluid p-2 w-10 max-w-30rem m-auto">
     <form [formGroup]="form">
       <div class="grid">
         <div class="field col-12">
           <p-floatlabel variant="over">
             <p-iconfield>
               <p-inputicon class="pi pi-user"></p-inputicon>
-              <input type="text" pInputText id="userName" formControlName="userName" fluid>
+              <input type="text" pInputText id="email" formControlName="email" fluid>
             </p-iconfield>
-            <label for="userName">Usuário</label>
+            <label for="email">Email</label>
           </p-floatlabel>
         </div>
-        <div class="field col-12">
+        <div class="field col-12" [hidden]="!form.get('email')?.value">
           <p-floatlabel variant="over">
             <p-iconfield>
               <p-inputicon class="pi pi-lock"></p-inputicon>
@@ -46,13 +46,16 @@
     </form>
   </div>
 
-  <div class="-yellow-100 fluid w-10 max-w-30rem m-auto">
+  <div class="fluid w-10 max-w-30rem m-auto">
     <p-divider [align]="'center'">OU</p-divider>
   </div>
 
-  <div class="-orange-100 fluid p-2 w-10 max-w-30rem m-auto">
+  <div class="fluid p-2 w-10 max-w-30rem m-auto">
     <p-button label="Criar conta" fluid size="large" severity="info" routerLink="/register"></p-button>
   </div>
 
+  <div class="w-full m-auto flex justify-content-center align-items-center my-3" style="height: 5rem;">
+    <p>Criado por <a href="#" class="no-underline text-primary">Gustavo Pilar</a></p>
+  </div>
 
 </div>
