@@ -50,7 +50,7 @@ import { CardModule } from 'primeng/card';
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: false
+          darkModeSelector: "system"
         }
       }
     })

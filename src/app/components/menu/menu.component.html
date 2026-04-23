@@ -1,10 +1,6 @@
 <div class="fluid p-2">
 
   <div class="w-full flex justify-content-between align-items-center">
-    <div class="flex gap-2">
-      Logo
-    </div>
-
     <div class="block md:hidden">
       <p-button variant="text" icon="pi pi-bars" severity="contrast" size="small" (onClick)="onExpandOrCollapseRoot()"></p-button>
     </div>
@@ -27,7 +23,8 @@
     </div>
 
     <div>
-      <p-avatar class="pi pi-user cursor-pointer bg-green-100 text-grenn-500" shape="circle"></p-avatar>
+      <!-- <p-avatar class="pi pi-cog cursor-pointer" shape="circle" (click)="openSettings()"></p-avatar> -->
+       <p-button variant="text" severity="contrast" icon="pi pi-cog" (onClick)="openSettings()" size="small"></p-button>
     </div>
   </div>
 

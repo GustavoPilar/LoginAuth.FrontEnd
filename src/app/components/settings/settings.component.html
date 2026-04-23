@@ -1,0 +1,17 @@
+<p-confirmDialog key="exit" header="Deseja sair?" message="Você será deslogado da sessão atual.">
+  <ng-template #footer>
+    <div class="w-full p-2 flex justify-content-between align-items-center">
+      <p-button variant="text" severity="danger" label="Não" icon="pi pi-undo" iconPos="right" size="small" (onClick)="closeConfirm()"></p-button>
+      <p-button variant="text" severity="success" label="Sim" icon="pi pi-power-off" size="small" (onClick)="logout()"></p-button>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+
+<div class="w-full p-2">
+  @for (item of items; track $index) {
+    <p-button variant="text" severity="contrast" [label]="item.label" [icon]="item.icon" size="small" fluid></p-button>
+    <p-divider></p-divider>
+  }
+
+  <p-button variant="text" severity="danger" label="Sair" icon="pi pi-power-off" size="small" fluid (onClick)="openConfirm()"></p-button>
+</div>

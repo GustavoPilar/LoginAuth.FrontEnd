@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MenuItem, PrimeIcons } from "primeng/api";
 import { MenuService } from "../../services/utils/menu.service";
+import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
+import { SettingsComponent } from "../settings/settings.component";
 
 @Component({
   selector: "app-menu",
@@ -17,11 +19,14 @@ export class MenuComponent implements OnInit {
   /** Itens de menu */
   public items: MenuItem[] = [];
 
+  public settingsDialogRef: DynamicDialogRef<SettingsComponent> | null = null;
+
   //#endregion
 
   //#region Constructor
   constructor(
-    private menuService: MenuService
+    private menuService: MenuService,
+    private dialogService: DialogService
   ) {
   }
   //#endregion
@@ -67,6 +72,14 @@ export class MenuComponent implements OnInit {
   public collapseAll(): void {
     this.items.forEach((menuItem: MenuItem) => {
       menuItem.expanded = false;
+    });
+  }
+
+  public openSettings(): void {
+    this.settingsDialogRef = this.dialogService.open(SettingsComponent ,{
+      styleClass: "w-11 max-w-30rem p-2",
+      closable: true,
+      draggable: false
     });
   }
 
