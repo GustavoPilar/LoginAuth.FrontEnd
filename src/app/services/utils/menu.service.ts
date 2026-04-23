@@ -8,9 +8,9 @@ export class MenuService {
 
     //#region Constructor
     constructor(
-        
+
     ) {
-        
+
     }
     //#endregion
 
@@ -26,7 +26,7 @@ export class MenuService {
 
         return root;
     }
-    
+
     private createApplication(): MenuItem {
         const root: MenuItem = {
             label: "Aplicação",
@@ -37,7 +37,7 @@ export class MenuService {
 
         return root;
     }
-    
+
     private createReport(): MenuItem {
         const root: MenuItem = {
             label: "Relatório",

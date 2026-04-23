@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { LoginComponent } from './pages/login/login.component';
 import { providePrimeNG } from 'primeng/config';
-import Aura from "@primeuix/themes/aura";
+import Aura from '@primeuix/themes/aura';
 import { RegisterComponent } from './pages/register/register.component';
 import { ComponentsModule } from './components/components.module';
 import { ButtonModule } from 'primeng/button';
@@ -19,6 +19,8 @@ import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { CardModule } from 'primeng/card';
+import { AboutComponent } from './pages/about/about.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { CardModule } from 'primeng/card';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { CardModule } from 'primeng/card';
     IconFieldModule,
     InputIconModule,
     CheckboxModule,
-    CardModule
+    CardModule,
+    BreadcrumbModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -50,11 +54,11 @@ import { CardModule } from 'primeng/card';
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: "system"
-        }
-      }
-    })
+          darkModeSelector: 'system',
+        },
+      },
+    }),
   ],
-  bootstrap: [App]
+  bootstrap: [App],
 })
 export class AppModule { }

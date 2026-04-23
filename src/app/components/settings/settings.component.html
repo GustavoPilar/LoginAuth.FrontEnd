@@ -9,7 +9,7 @@
 
 <div class="w-full p-2">
   @for (item of items; track $index) {
-    <p-button variant="text" severity="contrast" [label]="item.label" [icon]="item.icon" size="small" fluid></p-button>
+    <p-button variant="text" severity="contrast" [label]="item.label" [icon]="item.icon" size="small" fluid (onClick)="navigateTo(item.target!)"></p-button>
     <p-divider></p-divider>
   }
 

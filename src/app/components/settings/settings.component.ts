@@ -34,15 +34,20 @@ export class SettingsComponent implements OnInit {
     this.dynamicConfig.header = "Configuração";
 
     this.items = [
-      { label: "Conta de usuário", icon: PrimeIcons.USER },
-      { label: "Preferências", icon: PrimeIcons.PALETTE },
-      { label: "Sobre o sistema", icon: PrimeIcons.QUESTION_CIRCLE },
+      { label: "Conta de usuário", icon: PrimeIcons.USER, target: "account" },
+      { label: "Preferências", icon: PrimeIcons.PALETTE, target: "preferences" },
+      { label: "Sobre o sistema", icon: PrimeIcons.QUESTION_CIRCLE, target: "about" },
     ]
   }
 
   //#endregion
 
-  //#region Members 'Router' :: logout()
+  //#region Members 'Router' :: navigateTo(), logout()
+
+  public navigateTo(target: string): void {
+    this.router.navigate([target]);
+    this.dynamicDialogRef.close();
+  }
 
   /**
    * @description Retorna a página de login
