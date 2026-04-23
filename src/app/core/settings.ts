@@ -1,4 +1,8 @@
+import { MenuItem, PrimeIcons } from "primeng/api";
+
 export const Settings = {
-  showMenu: true,
-  showCreatedBy: true
+  showMenu: true as boolean,
+  showCreatedBy: true as boolean,
+  showBreadCrumb: true as boolean,
+  breadCrumbItems: [] as MenuItem[],
 }

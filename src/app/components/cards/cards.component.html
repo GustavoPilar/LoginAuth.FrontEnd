@@ -1,0 +1,23 @@
+<div class="w-full p-2 text-center">
+  <div class="grid gap-3" style="margin: 2rem 0;">
+
+   @for (item of items; track $index) {
+      <p-card class="field col-10 md:col-4 lg:col-3 m-auto">
+        <ng-template #title>
+          <div class="w-full flex justify-content-between alig-items-center">
+            <p>{{item?.label}}</p>
+            <i [class]="item?.icon"></i>
+          </div>
+          <p-divider></p-divider>
+        </ng-template>
+        <ng-template #content>
+          {{item?.tooltip ?? 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, aperiam' }}
+        </ng-template>
+        <ng-template #footer>
+          <p-button variant="text" label="Acessar" icon="pi pi-arrow-up" iconPos="right" (onClick)="navigateTo(item?.routerLink)"></p-button>
+        </ng-template>
+      </p-card>
+    }
+
+  </div>
+</div>

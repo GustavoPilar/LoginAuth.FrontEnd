@@ -1,0 +1,24 @@
+<div class="w-full p-2">
+  <div class="w-full m-auto flex justify-content-center align-items-center my-3" style="height: 5rem;">
+    <h1>{{title}} <i [class]="icon + ' text-3xl'"></i></h1>
+  </div>
+
+  <div class="fluid p-2 m-auto my-4 text-center" >
+
+    @if (subTitle) {
+      <h3>{{subTitle}}</h3>
+    }
+
+    <p>{{description}}</p>
+  </div>
+
+  <!-- <h1>{{title}} <i [class]="icon + ' text-3xl'"></i></h1>
+
+    @if (subTitle) {
+      <h3>{{subTitle}}</h3>
+    }
+
+    <p>{{description}}</p> -->
+
+    <p-divider></p-divider>
+</div>

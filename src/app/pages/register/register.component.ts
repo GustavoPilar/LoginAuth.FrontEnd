@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit {
     });
 
     Settings.showMenu = false;
+    Settings.showBreadCrumb = false;
   }
   //#endregion
 

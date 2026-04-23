@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, PrimeIcons } from 'primeng/api';
+import { Settings } from '../../core/settings';
 
 @Component({
   selector: 'app-about',
@@ -10,20 +11,18 @@ export class AboutComponent implements OnInit {
 
   //#region Fields
 
-  public items: MenuItem[] = [];
-
   //#endregion
 
   //#region Constructor
   constructor() {
-
+    Settings.breadCrumbItems = this.initBreadCrumb();
   }
   //#endregion
 
   //#region Members 'On' :: OnInit
 
   public ngOnInit(): void {
-    this.items = this.initBreadCrumb();
+
   }
 
   //#endregion
@@ -32,8 +31,7 @@ export class AboutComponent implements OnInit {
 
   public initBreadCrumb(): MenuItem[] {
     return [
-      { icon: PrimeIcons.HOME, routerLink: "/home" },
-      { icon: PrimeIcons.QUESTION_CIRCLE, routerLink: "/about" }
+      { label: "Sobre o sistema", icon: PrimeIcons.QUESTION_CIRCLE, routerLink: "/about" }
     ]
   }
 
@@ -54,11 +52,11 @@ export class AboutComponent implements OnInit {
   private createAboutManager(): MenuItem {
     let about: MenuItem = {
       label: "Gerenciamento",
-      tooltip: "A sessão de gerenciamento foi criada com a finalidade de possuir CRUDs - Create, Read, Update and Delete - básicos.",
+      tooltip: "Crie, leia, atualize ou remova registro de dados do seu sistema!",
       icon: PrimeIcons.PENCIL,
       items: [
-        { label: "Lista", tooltip: "Uma listagem de registro de acordo com o seu domínio de negócio", icon: PrimeIcons.LIST },
-        { label: "Formulários", tooltip: "Cada listagem possui seu formulário específico para criação ou atualização de registros", icon: PrimeIcons.FILE_EDIT }
+        { label: "Lista", tooltip: "Veja ou remova registros - ou parte deles - a partir de uma escolha entre as opções de gerenciamento", icon: PrimeIcons.LIST },
+        { label: "Formulários", tooltip: "Crie ou atualize um registro específico conforme o seu querer", icon: PrimeIcons.FILE_EDIT }
       ]
     };
 
@@ -67,12 +65,12 @@ export class AboutComponent implements OnInit {
 
   private createAboutApplication(): MenuItem {
     let about: MenuItem = {
-      label: "Aplicação",
-      tooltip: "A sessão de aplicação - se preferir pode trocar para outro nome - é distinada a partes que o sistema não tem necessidade de CRUD. Por exemplo, um rastreio em tempo real.",
+      label: "Sistema",
+      tooltip: "Veja do que o sistema é capaz de oferecer à você!",
       icon: PrimeIcons.PENCIL,
       items: [
-        { label: "Localização em Tempo Real", tooltip: "Apenas um exemplo para sessão de aplicação.", icon: PrimeIcons.MAP_MARKER },
-        { label: "Provas ou Aulas", tooltip: "Apenas um exemplo para sessão de aplicação.", icon: PrimeIcons.PLAY_CIRCLE },
+        { label: "Localização em Tempo Real", tooltip: "Exemplo do que o sistema pode oferecer.", icon: PrimeIcons.MAP_MARKER },
+        { label: "Provas ou Aulas", tooltip: "Exemplo do que o sistema pode oferecer.", icon: PrimeIcons.PLAY_CIRCLE },
       ]
     };
 
@@ -82,11 +80,12 @@ export class AboutComponent implements OnInit {
   private createAboutReport(): MenuItem {
     let about: MenuItem = {
       label: "Relatório",
-      tooltip: "A sessão de relatório é o lugar que você poderá gera-los conforme a necessidade do seu negócio da aplicação.",
+      tooltip: "Precisa saber sobre estatistícas? Aqui você encontra o que precisa.",
       icon: PrimeIcons.FILE,
       items: [
-        { label: "Tempo gasto em ...", tooltip: "Apenas um exemplo para sessão de relatórios.", icon: PrimeIcons.CLOCK },
-        { label: "Relatório Geral de ...", tooltip: "Apenas um exemplo para sessão de relatórios.", icon: PrimeIcons.CHART_LINE },
+        { label: "Relatório Geral", tooltip: "Exemplo de relatório.", icon: PrimeIcons.CHART_LINE },
+        { label: "Relatório Resumido", tooltip: "Exemplo de relatório.", icon: PrimeIcons.CHART_BAR },
+        { label: "Tempo Gasto", tooltip: "Exemplo de relatório.", icon: PrimeIcons.CLOCK },
       ]
     };
 

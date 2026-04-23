@@ -1,15 +1,13 @@
-<p-breadcrumb [model]="items"></p-breadcrumb>
+<app-header
+  title="Sobre o sistema"
+  icon="pi pi-question-circle"
+  subTitle="Conheça o sistema"
+  description="Aqui você descobrirá do que o sistema que você está utilizando é capaz de fazer!"
+></app-header>
 
-<div class="w-full m-auto" style="max-width: 80rem;">
-    <div class="w-full p-2 text-center">
-        <h1>Login Auth <i class="pi pi-lock text-3xl"></i></h1>
-        <p>Crie seu sistema a partir da nossa estrutura.</p>
-        <p class="p-2 border-1 border-blue-500 border-round-xl my-3">Por exemplo, essa página pode ser sobre o seu sistema ou empresa!</p>
-    </div>
+<div class="w-full m-auto">
 
     @for (item of getAbouts(); track $index) {
-
-      <p-divider></p-divider>
 
       <div class="w-full p-2 text-center">
           <h2>{{item.label}}</h2>

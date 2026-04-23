@@ -1,10 +1,20 @@
 
-@if (settings.showMenu) {
-  <app-menu></app-menu>
-}
+<div class="w-full w-11 m-auto" style="max-width: 80rem;">
+  @if (settings.showMenu) {
+    <app-menu></app-menu>
+  }
 
-<router-outlet />
+  @if (settings.showBreadCrumb) {
+    <p-breadcrumb [model]="settings.breadCrumbItems" [home]="breadCumbHome"></p-breadcrumb>
+  }
 
-@if (settings.showCreatedBy) {
-  <app-created-by></app-created-by>
-}
+
+  <router-outlet />
+
+
+  @if (settings.showCreatedBy) {
+    <app-created-by></app-created-by>
+  }
+</div>
+
+

@@ -54,7 +54,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: 'system',
+          darkModeSelector: 'none',
         },
       },
     }),

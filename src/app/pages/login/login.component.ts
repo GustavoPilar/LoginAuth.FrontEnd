@@ -10,7 +10,7 @@ import { Settings } from "../../core/settings";
 export class LoginComponent implements OnInit {
 
   //#region Fields
-  
+
   /** Formulário de login */
   public form: FormGroup;
 
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     });
 
     Settings.showMenu = false;
+    Settings.showBreadCrumb = false;
   }
   //#endregion
 

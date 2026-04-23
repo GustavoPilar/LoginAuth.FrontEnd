@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { Settings } from './core/settings';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,18 @@ import { Settings } from './core/settings';
 export class App {
 
   //#region Fields
-  settings = Settings;
+  public settings = Settings;
+
+  public breadCumbHome: MenuItem;
   //#endregion
 
   //#region Constructor
-  constructor(
-
-  ) {
+  constructor() {
+    this.breadCumbHome = {
+      // label: "Home",
+      icon: PrimeIcons.HOME,
+      routerLink: "/home"
+    }
   }
   //#endregion
 

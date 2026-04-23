@@ -1,0 +1,9 @@
+<app-header
+  title="Gerenciamento"
+  icon="pi pi-pencil"
+  description="Com um clique você pode começar a alimentar o seu sistema"
+></app-header>
+
+<div class="fluid p-2">
+  <app-cards [items]="mangerItem.items!" (onRouter)="navigateTo($event)"></app-cards>
+</div>

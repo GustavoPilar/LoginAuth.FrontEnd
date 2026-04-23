@@ -21,7 +21,11 @@ export class MenuService {
             label: "Gerenciamento",
             icon: PrimeIcons.PENCIL,
             expanded: false,
-            items: []
+            routerLink: "/manager",
+            items: [
+              { label: "Exemplo 1", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", routerLink: "exempleOne" },
+              { label: "Exemplo 2", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", routerLink: "exemploTwo" },
+            ]
         }
 
         return root;
@@ -55,9 +59,22 @@ export class MenuService {
 
     public GetMenus(): MenuItem[] {
         return [
-            this.createManager(),
-            this.createApplication(),
-            this.createReport()
+            this.GetManager(),
+            this.GetApplication(),
+            this.GetReport()
         ]
     }
+
+    public GetManager(): MenuItem {
+      return this.createManager();
+    }
+
+    public GetApplication(): MenuItem {
+      return this.createApplication();
+    }
+    public GetReport(): MenuItem {
+      return this.createReport();
+    }
+
+    //#endregion
 }

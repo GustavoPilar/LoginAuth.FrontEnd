@@ -11,12 +11,16 @@ import { SettingsComponent } from "./settings/settings.component";
 import { AppRoutingModule } from "../app-routing-module";
 import { ConfirmationService } from "primeng/api";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { HeaderComponent } from "./header/header.component";
+import { CardsComponent } from "./cards/cards.component";
 
 @NgModule({
   declarations: [
     MenuComponent,
     CreatedByComponent,
-    SettingsComponent
+    SettingsComponent,
+    HeaderComponent,
+    CardsComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,9 @@ import { ConfirmDialogModule } from "primeng/confirmdialog";
 ],
   exports: [
     MenuComponent,
-    CreatedByComponent
+    CreatedByComponent,
+    HeaderComponent,
+    CardsComponent
   ],
   providers: [
     DialogService,
