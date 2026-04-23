@@ -3,19 +3,21 @@ import { CrudBaseComponent } from "../../base/crud-base";
 import { BehaviorSubject, pipe, Subject, takeUntil } from "rxjs";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { ConfirmDialog } from "primeng/confirmdialog";
-import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-crud-list",
+  selector: "app-crud-form",
   standalone: false,
-  templateUrl: "./crud-list.component.html"
+  templateUrl: "./crud-form.component.html"
 })
-export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //#region Fields
 
   @Input()
   public entityName: string | null = null;
+
+  @Input()
+  public entityId: string | number | null = null;
 
   public crudBaseComponent!: CrudBaseComponent;
 
@@ -35,8 +37,7 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
     private viewRef: ViewContainerRef,
     private cdr: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService,
-    private router: Router
+    private messageService: MessageService
   ) {
 
   }
@@ -77,7 +78,8 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (this.crudBaseComponent) {
       this.crudBaseComponent.entityName = this.entityName;
-      this.crudBaseComponent.isList = true;
+      this.crudBaseComponent.entityId = this.entityId;
+      this.crudBaseComponent.isForm = true;
 
       this.crudBaseComponent.getRefreshObservable()
         .pipe(
@@ -103,72 +105,65 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.confirmDialog.onReject();
   }
 
-  public confirmationDelete(id: number): void {
-    this.confirmationService.confirm({
-      key: this.keyDialog,
-      closable: true,
-      accept: () => {
-        const deleteSub$: Subject<void> = new Subject<void>();
+  // public confirmationDelete(id: number): void {
+  //   this.confirmationService.confirm({
+  //     key: this.keyDialog,
+  //     closable: true,
+  //     accept: () => {
+  //       const deleteSub$: Subject<void> = new Subject<void>();
 
-        this.crudBaseComponent.crudManagerService.DeleteEntityById(id)
-          .pipe(
-            takeUntil(deleteSub$)
-          )
-          .subscribe({
-            next: (result: boolean) => {
-              if (result) {
-                this.messageService.add({
-                  severity: "success",
-                  summary: "Sucesso",
-                  detail: "Registro deletado com sucesso",
-                });
-              }
-              else {
-                this.messageService.add({
-                  severity: "error",
-                  summary: "Erro",
-                  detail: "O registro possui relações com outros. Remova-os antes de excluir esse."
-                });
-              }
+  //       this.crudBaseComponent.crudManagerService.DeleteEntityById(id)
+  //         .pipe(
+  //           takeUntil(deleteSub$)
+  //         )
+  //         .subscribe({
+  //           next: (result: boolean) => {
+  //             if (result) {
+  //               this.messageService.add({
+  //                 severity: "success",
+  //                 summary: "Sucesso",
+  //                 detail: "Registro deletado com sucesso",
+  //               });
+  //             }
+  //             else {
+  //               this.messageService.add({
+  //                 severity: "error",
+  //                 summary: "Erro",
+  //                 detail: "O registro possui relações com outros. Remova-os antes de excluir esse."
+  //               });
+  //             }
 
-              this.cdr.detectChanges();
-              this.closeSubscription(deleteSub$);
-              this.crudBaseComponent.loadEntities();
-            },
-            error: (err: any) => {
-              console.log(err);
-              this.messageService.add({
-                severity: "error",
-                summary: "Erro",
-                detail: "Erro ao tentar excluir o registro"
-              });
-              this.closeSubscription(deleteSub$);
-            }
-          });
-      },
-      reject: () => {
-        this.messageService.add({
-          severity: "info",
-          summary: "Cancelado",
-          detail: "Exclusão de registro cancelada.",
-          closable: true
-        });
-      }
-    });
-  }
+  //             this.cdr.detectChanges();
+  //             this.closeSubscription(deleteSub$);
+  //             this.crudBaseComponent.loadEntities();
+  //           },
+  //           error: (err: any) => {
+  //             console.log(err);
+  //             this.messageService.add({
+  //               severity: "error",
+  //               summary: "Erro",
+  //               detail: "Erro ao tentar excluir o registro"
+  //             });
+  //             this.closeSubscription(deleteSub$);
+  //           }
+  //         });
+  //     },
+  //     reject: () => {
+  //       this.messageService.add({
+  //         severity: "info",
+  //         summary: "Cancelado",
+  //         detail: "Exclusão de registro cancelada.",
+  //         closable: true
+  //       });
+  //     }
+  //   });
+  // }
 
   //#endregion
 
   //#region Members 'Form' :: newEntity(), editEntity()
 
-  public entityForm(id?: number | string): void {
-    if (id != undefined) {
-      this.router.navigate(["/manager/edit/", this.entityName, id]);
-    }
-    else {
-      this.router.navigate(["/manager/new/", this.entityName]);
-    }
-  }
+
 
   //#endregion
 

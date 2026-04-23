@@ -1,0 +1,17 @@
+<p-toast></p-toast>
+<p-confirmdialog #confirmDialog [key]="keyDialog" header="Deletar">
+  <ng-template #message>
+    <p>
+      Deseja excluir o registro?<br>
+      Todos os registros associados a ele também serão excluídos
+    </p>
+  </ng-template>
+  <ng-template #footer let-dialog="dialog">
+    <div class="w-full p-2 flex justify-content-between align-items-center">
+      <p-button variant="text" label="Não" icon="pi pi-times" iconPos="right" severity="danger" rounded (onClick)="onReject()"></p-button>
+      <p-button variant="text" label="Sim" icon="pi pi-check" severity="success" rounded (onClick)="onAccept()"></p-button>
+    </div>
+  </ng-template>
+</p-confirmdialog>
+
+Em construção

@@ -23,7 +23,7 @@
           <h4><i [class]="crudBaseComponent.icon"></i> {{crudBaseComponent.getListDescription()}}</h4>
         </ng-template>
         <ng-template #end>
-          <p-button icon="pi pi-plus" size="small"></p-button>
+          <p-button icon="pi pi-plus" size="small" (onClick)="entityForm()"></p-button>
         </ng-template>
       </p-toolbar>
     </ng-template>
@@ -36,12 +36,12 @@
       </tr>
     </ng-template>
     <ng-template #body let-result let-columns="columns">
-      <tr>
+      <tr (dblclick)="entityForm(result.id)">
         @for (column of columns; track $index) {
           <td>{{result[column.field]}}</td>
         }
         <td class="flex justify-content-evenly align-items-center">
-          <p-button class="hidden md:block" variant="text" severity="info" icon="pi pi-pencil" size="small"></p-button>
+          <p-button class="hidden md:block" variant="text" severity="info" icon="pi pi-pencil" size="small" (onClick)="entityForm(result.id)"></p-button>
           <p-button variant="text" severity="danger" icon="pi pi-trash" size="small" (onClick)="confirmationDelete(result.id)"></p-button>
         </td>
       </tr>
@@ -55,5 +55,5 @@
 </div>
 }
 @else {
-  <p-message severity="error" icon="pi pi-times">Formulário não encontrado.</p-message>
+  <p-message severity="error" icon="pi pi-times">Lista não encontrado.</p-message>
 }

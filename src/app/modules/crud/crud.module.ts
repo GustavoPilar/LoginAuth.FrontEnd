@@ -16,12 +16,16 @@ import { ButtonModule } from "primeng/button";
 import { ExempleOneComponent } from "./entities/exempleOne/exempleOne.component";
 import { ToolbarModule } from "primeng/toolbar";
 import { MessageModule } from "primeng/message";
+import { CrudFormManagerComponent } from "./form/crud-form-manager/crud-form-manager.component";
+import { CrudFormComponent } from "./form/crud-form/crud-form.component";
 
 @NgModule({
   declarations: [
     CrudComponent,
     CrudListManagerComponent,
     CrudListComponent,
+    CrudFormManagerComponent,
+    CrudFormComponent,
 
     ExempleOneComponent
   ],
