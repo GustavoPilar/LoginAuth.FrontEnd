@@ -13,7 +13,7 @@
         <p-button variant="text" [label]="item.label" [icon]="item.icon" [severity]="item.expanded ? 'primary' : 'contrast'" size="small" (onClick)="onExpandOrCollapseChild(item)"></p-button>
 
         @if (item.expanded) {
-          <div class="w-full p-2 absolute bg-gray-100 border-round-2xl" style="margin-top: 4rem;">
+          <div class="w-full p-2 absolute bg-gray-200 border-round-2xl" style="margin-top: 4rem;">
             @if (!item.items?.length) {
               <p-button variant="text" label="Nenhum acesso rápido foi implementado" severity="contrast" fluid></p-button>
             }
@@ -27,7 +27,7 @@
     </div>
 
     <div>
-      <p-avatar class="pi pi-user cursor-pointer" shape="circle"></p-avatar>
+      <p-avatar class="pi pi-user cursor-pointer bg-green-100 text-grenn-500" shape="circle"></p-avatar>
     </div>
   </div>
 

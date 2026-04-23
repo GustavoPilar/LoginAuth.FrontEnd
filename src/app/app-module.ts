@@ -18,6 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HomeComponent } from './pages/home/home.component';
     IconFieldModule,
     InputIconModule,
     CheckboxModule,
+    CardModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

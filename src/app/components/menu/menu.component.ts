@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MenuItem, PrimeIcons } from "primeng/api";
+import { MenuService } from "../../services/utils/menu.service";
 
 @Component({
   selector: "app-menu",
@@ -14,23 +15,20 @@ export class MenuComponent implements OnInit {
   public expanded: boolean = false;
 
   /** Itens de menu */
-  public items: MenuItem[] = [
-    { label: "Gerenciamento", icon: PrimeIcons.PENCIL, expanded: false, items: [{ label: "Usuários", icon: PrimeIcons.USERS }, { label: "Provas", icon: PrimeIcons.FILE }] },
-    { label: "Segurança", icon: PrimeIcons.SHIELD, expanded: false },
-    { label: "Relatório", icon: PrimeIcons.FILE, expanded: false },
-  ];
+  public items: MenuItem[] = [];
 
   //#endregion
 
   //#region Constructor
-  constructor() {
-
+  constructor(
+    private menuService: MenuService
+  ) {
   }
   //#endregion
 
   //#region Members 'On' :: OnInit
   public ngOnInit(): void {
-
+    this.items = this.menuService.GetMenus();
   }
   //#endregion
 

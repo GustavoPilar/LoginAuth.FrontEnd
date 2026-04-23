@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Settings } from "../../core/settings";
+import { MenuItem } from "primeng/api";
+import { MenuService } from "../../services/utils/menu.service";
 
 @Component({
   selector: "app-home",
@@ -10,11 +12,16 @@ export class HomeComponent implements OnInit {
 
   //#region Fields
 
+  public items: MenuItem[] = [];
+
   //#endregion
 
   //#region Constructor
-  constructor() {
+  constructor(
+    private menuService: MenuService
+  ) {
     Settings.showMenu = true;
+    this.items = this.menuService.GetMenus();
   }
   //#endregion
 
