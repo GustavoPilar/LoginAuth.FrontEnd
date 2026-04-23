@@ -9,6 +9,7 @@ export const routes: Routes = [
   { path: "", component: CrudComponent },
   { path: "list/:entityName", component: CrudListManagerComponent },
   { path: "edit/:entityName/:entityId", component: CrudFormManagerComponent },
+  { path: "new/:entityName", component: CrudFormManagerComponent },
 ]
 
 @NgModule({
