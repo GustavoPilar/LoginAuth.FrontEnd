@@ -38,9 +38,8 @@ export class CrudComponent implements OnInit {
 
   //#region Members :: navigateTo()
 
-  public navigateTo(target: string): void {
-    // this.router.navigate(["list", target]);
-    alert(target);
+  public navigateTo(routerLink: string): void {
+    this.router.navigate(["manager/list", routerLink]);
   }
 
   //#endregion

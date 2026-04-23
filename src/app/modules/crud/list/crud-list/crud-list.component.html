@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<p-confirmdialog #confirmDialog [key]="keyDialog" header="Deletar">
+  <ng-template #message>
+    <p>
+      Deseja excluir o registro?<br>
+      Todos os registros associados a ele também serão excluídos
+    </p>
+  </ng-template>
+  <ng-template #footer let-dialog="dialog">
+    <div class="w-full p-2 flex justify-content-between align-items-center">
+      <p-button variant="text" label="Não" icon="pi pi-times" iconPos="right" severity="danger" rounded (onClick)="onReject()"></p-button>
+      <p-button variant="text" label="Sim" icon="pi pi-check" severity="success" rounded (onClick)="onAccept()"></p-button>
+    </div>
+  </ng-template>
+</p-confirmdialog>
+
+@if (crudBaseComponent && crudBaseComponent.crudManagerService) {
+<div class="w-full p-2">
+  <p-table [value]="crudBaseComponent.entities" [columns]="crudBaseComponent.getDisplayColumn()" size="small" paginator [rows]="10" [rowsPerPageOptions]="[10, 20, 50, 100, 200]" stripedRows>
+    <ng-template #caption>
+      <p-toolbar>
+        <ng-template #start>
+          <h4><i [class]="crudBaseComponent.icon"></i> {{crudBaseComponent.getListDescription()}}</h4>
+        </ng-template>
+        <ng-template #end>
+          <p-button icon="pi pi-plus" size="small"></p-button>
+        </ng-template>
+      </p-toolbar>
+    </ng-template>
+    <ng-template #header let-columns>
+      <tr>
+        @for (column of columns; track $index) {
+          <th><i [class]="column?.icon"></i> {{column.description}}</th>
+        }
+        <th class="text-center">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-result let-columns="columns">
+      <tr>
+        @for (column of columns; track $index) {
+          <td>{{result[column.field]}}</td>
+        }
+        <td class="flex justify-content-evenly align-items-center">
+          <p-button class="hidden md:block" variant="text" severity="info" icon="pi pi-pencil" size="small"></p-button>
+          <p-button variant="text" severity="danger" icon="pi pi-trash" size="small" (onClick)="confirmationDelete(result.id)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td [colSpan]="crudBaseComponent.getDisplayColumn().length + 1">Nenhum registro encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+}
+@else {
+  <p-message severity="error" icon="pi pi-times">Formulário não encontrado.</p-message>
+}
