@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "about", component: AboutComponent },
   { path: "manager", loadChildren: () => import("./modules/crud/crud.module").then(cm => cm.CrudModule) },
-  { path: "system", loadChildren: () => import("./modules/system/system.module").then(sm => sm.SystemModule) },
+  { path: "system", loadChildren: () => import("./modules/system/system.module").then(cm => cm.SystemModule) },
+  { path: "report", loadChildren: () => import("./modules/report/report.module").then(rm => rm.ReportModule) },
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "**", redirectTo: "/home", pathMatch: "full" },
 ];

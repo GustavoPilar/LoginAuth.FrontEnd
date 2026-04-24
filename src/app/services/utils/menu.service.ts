@@ -54,7 +54,10 @@ export class MenuService {
             icon: PrimeIcons.FILE,
             tooltip: "Deseja saber sobre estatísticas de seu sistema? Aqui é o lugar certo!",
             expanded: false,
-            items: []
+            routerLink: "report/",
+            items: [
+              { label: "Geral", icon: PrimeIcons.EYE, tooltip: "Gere um relatório geral sobre seu sistema", routerLink: "general" }
+            ]
         }
 
         return root;

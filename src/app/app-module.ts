@@ -23,6 +23,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CrudModule } from './modules/crud/crud.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ReportModule } from './modules/report/report.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ComponentsModule,
     CrudModule,
     ApplicationModule,
+    ReportModule,
 
     ReactiveFormsModule,
     InputTextModule,

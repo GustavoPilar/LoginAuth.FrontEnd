@@ -1,0 +1,21 @@
+<app-header
+  title="Relatório Geral"
+  icon="pi pi-eye"
+  description="Veja um relatório completo sobre o seus sistema"
+></app-header>
+
+<div class="w-full p-2">
+  <div class="grid">
+    <div class="field col-12">
+      <p-card>
+        <ng-template #title>
+          Porcentagem de acertos em provas
+        </ng-template>
+        <ng-template #content>
+          <p-chart type="bar" [data]="basicData" [options]="basicOptions">
+          </p-chart>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
