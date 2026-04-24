@@ -21,10 +21,10 @@ export class MenuService {
             label: "Gerenciamento",
             icon: PrimeIcons.PENCIL,
             expanded: false,
-            routerLink: "/manager",
+            routerLink: "manager",
             items: [
-              { label: "Exemplo 1", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", routerLink: "exempleOne" },
-              { label: "Exemplo 2", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", routerLink: "exemploTwo" },
+              { label: "Exemplo 1", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", target: "list", routerLink: "exempleOne" },
+              { label: "Exemplo 2", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", target: "list", routerLink: "exempleTwo" },
             ]
         }
 

@@ -9,13 +9,13 @@
         <p-button variant="text" [label]="item.label" [icon]="item.icon" [severity]="item.expanded ? 'primary' : 'contrast'" size="small" (onClick)="onExpandOrCollapseChild(item)"></p-button>
 
         @if (item.expanded) {
-          <div class="w-full p-2 absolute border-round-2xl bg-gray-100" style="margin-top: 4rem;">
+          <div class="w-full p-2 absolute border-round-2xl bg-gray-100" style="margin-top: 4rem; z-index: 1000;">
             @if (!item.items?.length) {
               <p-button variant="text" label="Nenhum acesso rápido foi implementado" severity="contrast" fluid></p-button>
             }
 
             @for (child of item.items; track $index) {
-              <p-button variant="text" [label]="child.label" severity="contrast" [icon]="child.icon" fluid></p-button>
+              <p-button variant="text" [label]="child.label" severity="contrast" [icon]="child.icon" fluid (onClick)="navigateTo(item.routerLink, child.target!, child.routerLink)"></p-button>
             }
           </div>
         }
@@ -41,7 +41,7 @@
             }
 
             @for (child of item.items; track $index) {
-              <p-button variant="text" [label]="child.label" severity="contrast" [icon]="child.icon" fluid size="small"></p-button>
+              <p-button variant="text" [label]="child.label" severity="contrast" [icon]="child.icon" fluid size="small" (onClick)="navigateTo(item.routerLink, child.target!, child.routerLink)"></p-button>
 
               <p-divider></p-divider>
             }

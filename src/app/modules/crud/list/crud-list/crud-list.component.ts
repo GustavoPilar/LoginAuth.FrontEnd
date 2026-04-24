@@ -1,3 +1,4 @@
+import { LoaderService } from './../../../../services/utils/loader.service';
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { CrudBaseComponent } from "../../base/crud-base";
 import { BehaviorSubject, pipe, Subject, takeUntil } from "rxjs";
@@ -15,11 +16,9 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
   //#region Fields
 
   @Input()
-  public entityName: string | null = null;
+  public entityName!: string;
 
   public crudBaseComponent!: CrudBaseComponent;
-
-  public refresh: boolean = false;
 
   private destroySubs$: Subject<void> = new Subject<void>();
 
@@ -36,7 +35,8 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {
 
   }
@@ -84,7 +84,15 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
           takeUntil(this.destroySubs$)
         )
         .subscribe({
-          next: (result: boolean) => {
+          next: (result: boolean | null) => {
+            if (result == false) {
+              this.messageService.add({
+                severity: "error",
+                summary: "Erro",
+                detail: "Erro ao carregar os registros"
+              });
+            }
+
             this.cdr.detectChanges();
           }
         })
@@ -108,6 +116,7 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
       key: this.keyDialog,
       closable: true,
       accept: () => {
+        this.loaderService.Show();
         const deleteSub$: Subject<void> = new Subject<void>();
 
         this.crudBaseComponent.crudManagerService.DeleteEntityById(id)
@@ -134,6 +143,7 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
               this.cdr.detectChanges();
               this.closeSubscription(deleteSub$);
               this.crudBaseComponent.loadEntities();
+              this.loaderService.Hide();
             },
             error: (err: any) => {
               console.log(err);
@@ -143,6 +153,7 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
                 detail: "Erro ao tentar excluir o registro"
               });
               this.closeSubscription(deleteSub$);
+              this.loaderService.Hide();
             }
           });
       },
@@ -153,6 +164,7 @@ export class CrudListComponent implements OnInit, AfterViewInit, OnDestroy {
           detail: "Exclusão de registro cancelada.",
           closable: true
         });
+        this.loaderService.Hide();
       }
     });
   }

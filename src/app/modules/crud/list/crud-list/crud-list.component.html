@@ -20,7 +20,7 @@
     <ng-template #caption>
       <p-toolbar>
         <ng-template #start>
-          <h4><i [class]="crudBaseComponent.icon"></i> {{crudBaseComponent.getListDescription()}}</h4>
+          <h4><i [class]="crudBaseComponent.icon"></i> {{crudBaseComponent.getTypeDescription().plural}}</h4>
         </ng-template>
         <ng-template #end>
           <p-button icon="pi pi-plus" size="small" (onClick)="entityForm()"></p-button>

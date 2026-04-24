@@ -3,6 +3,7 @@ import { MenuItem, PrimeIcons } from "primeng/api";
 import { MenuService } from "../../services/utils/menu.service";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { SettingsComponent } from "../settings/settings.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-menu",
@@ -26,7 +27,8 @@ export class MenuComponent implements OnInit {
   //#region Constructor
   constructor(
     private menuService: MenuService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {
   }
   //#endregion
@@ -73,6 +75,13 @@ export class MenuComponent implements OnInit {
     this.items.forEach((menuItem: MenuItem) => {
       menuItem.expanded = false;
     });
+  }
+
+  public navigateTo(parentRouterLink: string, target: string, routerLink: string): void {
+    let url: string = parentRouterLink + "/" + target + "/" + routerLink;
+    this.router.navigate([url]);
+    this.collapseAll();
+    this.expanded = false;
   }
 
   public openSettings(): void {

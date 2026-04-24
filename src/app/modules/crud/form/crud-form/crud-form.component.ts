@@ -1,8 +1,10 @@
+import { LoaderService } from './../../../../services/utils/loader.service';
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { CrudBaseComponent } from "../../base/crud-base";
 import { BehaviorSubject, pipe, Subject, takeUntil } from "rxjs";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { ConfirmDialog } from "primeng/confirmdialog";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-crud-form",
@@ -14,30 +16,32 @@ export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
   //#region Fields
 
   @Input()
-  public entityName: string | null = null;
+  public entityName!: string;
 
   @Input()
-  public entityId: string | number | null = null;
+  public entityId!: number;
+
+  @ViewChild("crudForm", { read: ViewContainerRef })
+  public crudFormView!: ViewContainerRef;
 
   public crudBaseComponent!: CrudBaseComponent;
-
-  public refresh: boolean = false;
 
   private destroySubs$: Subject<void> = new Subject<void>();
 
   @ViewChild("confirmDialog")
   public confirmDialog!: ConfirmDialog;
-
-  public keyDialog: string = "delete";
+  
+  public keyDialog: string = "return";
 
   //#endregion
 
   //#region Constructor
   constructor(
-    private viewRef: ViewContainerRef,
     private cdr: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
+    private laoderService: LoaderService
   ) {
 
   }
@@ -73,7 +77,7 @@ export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
   public async loadCrudBaseComponent(): Promise<void> {
     const module = await import(`../../entities/${this.entityName}/${this.entityName}.component.ts`);
     const componentName: string = Object.keys(module)[0];
-    const createdComponent: ComponentRef<unknown> = this.viewRef.createComponent(module[componentName]);
+    const createdComponent: ComponentRef<unknown> = this.crudFormView.createComponent(module[componentName]);
     this.crudBaseComponent = createdComponent.instance as CrudBaseComponent;
 
     if (this.crudBaseComponent) {
@@ -86,7 +90,16 @@ export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
           takeUntil(this.destroySubs$)
         )
         .subscribe({
-          next: (result: boolean) => {
+          next: (result: boolean | null) => {
+
+            if (result == false) {
+              this.messageService.add({
+                severity: "error",
+                summary: "Erro",
+                detail: "Erro ao carregar o registro"
+              });
+            }
+
             this.cdr.detectChanges();
           }
         })
@@ -105,65 +118,62 @@ export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.confirmDialog.onReject();
   }
 
-  // public confirmationDelete(id: number): void {
-  //   this.confirmationService.confirm({
-  //     key: this.keyDialog,
-  //     closable: true,
-  //     accept: () => {
-  //       const deleteSub$: Subject<void> = new Subject<void>();
-
-  //       this.crudBaseComponent.crudManagerService.DeleteEntityById(id)
-  //         .pipe(
-  //           takeUntil(deleteSub$)
-  //         )
-  //         .subscribe({
-  //           next: (result: boolean) => {
-  //             if (result) {
-  //               this.messageService.add({
-  //                 severity: "success",
-  //                 summary: "Sucesso",
-  //                 detail: "Registro deletado com sucesso",
-  //               });
-  //             }
-  //             else {
-  //               this.messageService.add({
-  //                 severity: "error",
-  //                 summary: "Erro",
-  //                 detail: "O registro possui relações com outros. Remova-os antes de excluir esse."
-  //               });
-  //             }
-
-  //             this.cdr.detectChanges();
-  //             this.closeSubscription(deleteSub$);
-  //             this.crudBaseComponent.loadEntities();
-  //           },
-  //           error: (err: any) => {
-  //             console.log(err);
-  //             this.messageService.add({
-  //               severity: "error",
-  //               summary: "Erro",
-  //               detail: "Erro ao tentar excluir o registro"
-  //             });
-  //             this.closeSubscription(deleteSub$);
-  //           }
-  //         });
-  //     },
-  //     reject: () => {
-  //       this.messageService.add({
-  //         severity: "info",
-  //         summary: "Cancelado",
-  //         detail: "Exclusão de registro cancelada.",
-  //         closable: true
-  //       });
-  //     }
-  //   });
-  // }
+  public confirmationReturn(): void {
+    this.confirmationService.confirm({
+      key: this.keyDialog,
+      closable: true,
+      accept: () => {
+        this.returnToList()
+      }
+    });
+  }
 
   //#endregion
 
-  //#region Members 'Form' :: newEntity(), editEntity()
+  //#region Members 'List' :: returnToList()
 
+  private returnToList(): void {
+    this.router.navigate(["/manager/list/", this.entityName]);
+  }
 
+  //#endregion
+
+  //#region Members 'General' :: getDescription(), canSave()
+
+  public getDescription(): string {
+    if (this.crudBaseComponent)
+      return this.crudBaseComponent.getTypeDescription().getFormDescription();
+
+    return "Formulário";
+  }
+
+  public canSave(): boolean {
+    if (!this.crudBaseComponent)
+      return false;
+
+    return this.crudBaseComponent.canSave()
+  }
+
+  public save(): void {
+    this.laoderService.Show();
+    this.crudBaseComponent.crudManagerService.CreateEntity()
+      .pipe(
+        takeUntil(this.destroySubs$)
+      ).subscribe({
+        next: (result: any) => {
+          this.laoderService.Hide();
+          this.returnToList();
+        },
+        error: (err: any) => {
+          this.messageService.add({
+            severity: "error",
+            summary: "Erro",
+            detail: "Erro ao salvar.\nTenta novamente."
+          });
+          this.laoderService.Hide();
+        }
+      });
+  }
 
   //#endregion
 
