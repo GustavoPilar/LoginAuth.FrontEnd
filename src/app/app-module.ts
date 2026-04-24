@@ -21,6 +21,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CardModule } from 'primeng/card';
 import { AboutComponent } from './pages/about/about.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     InputIconModule,
     CheckboxModule,
     CardModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+
+    NgxSpinnerModule.forRoot({ type: "ball-atom" })
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

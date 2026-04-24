@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { EntityBase } from "../../../models/base/entity-base";
 import { CrudBaseComponent } from "./crud-base";
+import { ApiService } from "../../../services/communication/api.service";
 
 @Injectable({
   providedIn: "root"
@@ -10,14 +11,16 @@ export class CrudManagerService {
 
   //#region Fields
 
-  public entityName: string | null = null;
+  public entityName!: string;
 
-  public entityId: number | string | null = null;
+  public entityId!: number;
 
   public crudBaseComponent!: CrudBaseComponent;
 
   //#region Constructor
-  constructor() {
+  constructor(
+    private apiService: ApiService
+  ) {
 
   }
   //#endregion
@@ -40,10 +43,7 @@ export class CrudManagerService {
    * @returns {Observable<any[]>}
    */
   public GetEntities(): Observable<any[]> {
-    return of([
-      { id: 0, name: "Gustavo", description: "Programador", age: 20 },
-      { id: 1, name: "Yasmin", description: "Estagiária", age: 21 },
-    ]);
+    return this.apiService.GetEntities(this.entityName);
   }
 
   /**
@@ -51,7 +51,11 @@ export class CrudManagerService {
    * @returns {Observable<any>}
    */
   public GetEntityById(): Observable<any> {
-    return of();
+    
+    if (this.entityId == undefined)
+      return of({id: 0});
+    
+    return this.apiService.GetEntityById(this.entityName, this.entityId);
   }
 
   //#endregion
@@ -63,7 +67,14 @@ export class CrudManagerService {
    * @returns {Observable<any>}
    */
   public CreateEntity(): Observable<any> {
-    return of();
+    let entity: any = this.crudBaseComponent.prepareEntityToSave()
+    
+    if (this.entityId && this.entityId > 0) {
+      entity.id = this.entityId;
+      return this.UpdateEntity(entity);
+    }
+
+    return this.apiService.CreateEntity(this.entityName, entity);
   }
 
   //#endregion
@@ -74,8 +85,8 @@ export class CrudManagerService {
    * @description Atualiza o registro de uma entidade
    * @returns {Observable<Entity>}
    */
-  public UpdateEntity(): Observable<any> {
-    return of();
+  public UpdateEntity(entity: any): Observable<any> {
+    return this.apiService.UpdateEntity(this.entityName, entity);
   }
 
   //#endregion
@@ -88,7 +99,7 @@ export class CrudManagerService {
    * @returns {Observable<boolean>}
    */
   public DeleteEntityById(id: number): Observable<boolean> {
-    return of(true);
+    return this.apiService.DeleteEntity(this.entityName, id);
   }
 
   //#endregion

@@ -18,6 +18,10 @@ import { ToolbarModule } from "primeng/toolbar";
 import { MessageModule } from "primeng/message";
 import { CrudFormManagerComponent } from "./form/crud-form-manager/crud-form-manager.component";
 import { CrudFormComponent } from "./form/crud-form/crud-form.component";
+import { CardModule } from "primeng/card";
+import { InputTextModule } from "primeng/inputtext";
+import { ExempleTwoComponent } from "./entities/exempleTwo/exempleTwo.component";
+import { InputNumberModule } from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { CrudFormComponent } from "./form/crud-form/crud-form.component";
     CrudFormManagerComponent,
     CrudFormComponent,
 
-    ExempleOneComponent
+    ExempleOneComponent,
+    ExempleTwoComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,10 @@ import { CrudFormComponent } from "./form/crud-form/crud-form.component";
     TableModule,
     ButtonModule,
     ToolbarModule,
-    MessageModule
+    MessageModule,
+    CardModule,
+    InputTextModule,
+    InputNumberModule
   ],
   providers: [
     MessageService,

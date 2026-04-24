@@ -1,9 +1,9 @@
 <p-toast></p-toast>
-<p-confirmdialog #confirmDialog [key]="keyDialog" header="Deletar">
+<p-confirmdialog #confirmDialog [key]="keyDialog" header="Retornar">
   <ng-template #message>
     <p>
-      Deseja excluir o registro?<br>
-      Todos os registros associados a ele também serão excluídos
+      Deseja sair do formulário?<br>
+      Todo progresso não será salvo.
     </p>
   </ng-template>
   <ng-template #footer let-dialog="dialog">
@@ -14,4 +14,19 @@
   </ng-template>
 </p-confirmdialog>
 
-Em construção
+<p-card>
+  <ng-template #title>
+    {{getDescription()}}
+  </ng-template>
+  <ng-template #content>
+    <div class="w-full p-2">
+      <div #crudForm></div>
+    </div>
+  </ng-template>
+  <ng-template #footer>
+    <div class="w-full p-2 flex justify-content-between align-items-center">
+      <p-button variant="text" label="Cancelar" icon="pi pi-undo" iconPos="right" severity="danger" (onClick)="confirmationReturn()"></p-button>
+      <p-button variant="text" label="Salvar" icon="pi pi-send" iconPos="right" severity="success" (onClick)="save()" [disabled]="!canSave()"></p-button>
+    </div>
+  </ng-template>
+</p-card>

@@ -4,8 +4,10 @@ import { EntityBase } from "../../../models/base/entity-base";
 import { CrudManagerService } from "./crud-manager.service";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { DialogService } from "primeng/dynamicdialog";
-import { BehaviorSubject, catchError, Observable, of, Subject, takeUntil, throwError } from "rxjs";
+import { BehaviorSubject, catchError, Observable, of, Subject, switchMap, takeUntil, throwError } from "rxjs";
 import { DisplayColumn } from "./models/display-column";
+import { TypeDescription } from "./models/type-description";
+import { LoaderService } from "../../../services/utils/loader.service";
 
 @Component({
   selector: "app-crud-base",
@@ -18,10 +20,10 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
   //#region Fields
 
   @Input()
-  public entityName: string | null = null;
+  public entityName!: string;
 
   @Input()
-  public entityId: number | string | null = null;
+  public entityId!: number;
 
 
   @Input()
@@ -36,9 +38,9 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
 
   public icon: string | null = null;
 
-  public form: FormGroup | null = null;
+  public form!: FormGroup;
 
-  private refreshSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private refreshSubject$: BehaviorSubject<boolean | null> = new BehaviorSubject<boolean | null>(null);
 
   private destroySubs$: Subject<void> = new Subject<void>();
 
@@ -50,7 +52,8 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
     protected formBuilder: FormBuilder,
     protected messageService: MessageService,
     protected confirmationService: ConfirmationService,
-    protected dialogService: DialogService
+    protected dialogService: DialogService,
+    protected loaderService: LoaderService
   ) {
 
   }
@@ -58,10 +61,11 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
 
   //#region Members 'On' :: ngOnInit
   public ngOnInit(): void {
+    this.loaderService.Show();
     this.crudManagerService.Initialize(this as CrudBaseComponent);
 
-    if (this.form) {
-
+    if (this.isForm) {
+      this.loadEntity();
     }
     else if (this.isList) {
       this.loadEntities();
@@ -84,26 +88,75 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
       .subscribe({
         next: (entities: Entity[]) => {
           this.entities = entities;
+          this.loaderService.Hide();
           this.refreshSubject$.next(true);
         },
         error: (err: any) => {
           console.log(err);
-          this.refreshSubject$.next(true);
+          this.loaderService.Hide();
+          this.refreshSubject$.next(false);
         }
       });
   }
 
   public abstract getDisplayColumn(): DisplayColumn[];
 
-  public abstract getListDescription(): string;
+  //#endregion
+
+  //#region Members 'Form' :: getFormDescription()
+
+  public loadEntity(): void {
+    this.crudManagerService.GetEntityById()
+      .pipe(
+        takeUntil(this.destroySubs$),
+        switchMap((entity: Entity) => {
+          this.selectedEntity = entity;
+          return this.loadResources();
+        })
+      )
+      .subscribe({
+        next: (result) => {
+
+          this.initForm();
+          this.loaderService.Hide();
+          this.refreshSubject$.next(true);
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.loaderService.Hide();
+          this.refreshSubject$.next(false);
+        }
+      });
+  }
+
+  public loadResources(): Observable<any> {
+    return of([]);
+  }
+
+  public abstract initForm(): void;
+
+  public canSave(): boolean {
+    if (!this.form)
+      return false;
+
+    return this.form.valid;
+  }
+
+  public prepareEntityToSave(): Entity {
+    let entity: Entity = this.form.value;
+
+    return entity;
+  }
 
   //#endregion
 
   //#region Members 'General' :: getRefreshObservable()
 
-  public getRefreshObservable(): Observable<boolean> {
+  public getRefreshObservable(): Observable<boolean | null> {
     return this.refreshSubject$.asObservable();
   }
+
+  public abstract getTypeDescription(): TypeDescription;
 
   //#endregion
 

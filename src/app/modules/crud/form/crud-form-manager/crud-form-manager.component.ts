@@ -17,7 +17,7 @@ export class CrudFormManagerComponent implements OnInit, AfterViewInit {
   private crudFormComponent!: CrudFormComponent;
 
   private entityName: string;
-  private entityId: string | number;
+  private entityId: number;
 
   //#endregion
 

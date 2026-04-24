@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CrudBaseComponent } from "../../base/crud-base";
-import { ExempleOne } from "../../../../models/entities";
+import { ExempleTwo } from "../../../../models/entities";
 import { CrudManagerService } from "../../base/crud-manager.service";
 import { EntityBase } from "../../../../models/base/entity-base";
 import { FormBuilder, Validators } from "@angular/forms";
@@ -12,12 +12,12 @@ import { TypeDescription } from "../../base/models/type-description";
 import { LoaderService } from "../../../../services/utils/loader.service";
 
 @Component({
-  selector: "app-exemple-one",
+  selector: "app-exemple-two",
   standalone: false,
-  templateUrl: "./exempleOne.component.html",
+  templateUrl: "./exempleTwo.component.html",
   providers: [CrudManagerService]
 })
-export class ExempleOneComponent extends CrudBaseComponent<ExempleOne> implements OnInit {
+export class ExempleTwoComponent extends CrudBaseComponent<ExempleTwo> implements OnInit {
 
   //#region Fields
 
@@ -53,6 +53,12 @@ export class ExempleOneComponent extends CrudBaseComponent<ExempleOne> implement
         description: "Descrição",
         type: DisplayColumnType.Text,
         icon: PrimeIcons.TAG
+      },
+      {
+        field: "age",
+        description: "Idade",
+        type: DisplayColumnType.Numeric,
+        icon: PrimeIcons.SORT_NUMERIC_DOWN
       }
     ]
   }
@@ -64,7 +70,8 @@ export class ExempleOneComponent extends CrudBaseComponent<ExempleOne> implement
   public override initForm(): void {
     this.form = this.formBuilder.group({
       name: [this.selectedEntity?.name ?? null, Validators.required],
-      description: [this.selectedEntity?.description ?? null, Validators.required]
+      description: [this.selectedEntity?.description ?? null, Validators.required],
+      age: [this.selectedEntity?.age ?? null, Validators.required],
     });
   }
 

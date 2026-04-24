@@ -4,7 +4,7 @@ export class ExempleOne extends EntityBase {
 
 }
 
-export class ExemploTwo extends EntityBase {
+export class ExempleTwo extends EntityBase {
 
   age!: number;
 

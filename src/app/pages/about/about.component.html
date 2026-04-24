@@ -13,39 +13,43 @@
           <h2>{{item.label}}</h2>
           <p>{{item.tooltip}}</p>
 
+        @if ($index % 2 == 0) {
           @for (child of item.items; track $index) {
             <div class="grid" style="margin: 2rem 0;">
-
-              @if ($index % 2 == 0) {
-                <div class="field col-4 m-auto border-1 border-gray-200 border-round-3xl">
-                  <div class="p-2">
-                    <h1><i [class]="child.icon + ' text-3xl'"></i></h1>
-                  </div>
+              <div class="field col-4 md:col-3 m-auto border-1 border-gray-200 border-round-3xl">
+                <div class="p-2">
+                  <h1><i [class]="child.icon + ' text-3xl'"></i></h1>
                 </div>
-                <div class="field col-7 m-auto">
-                  <div class="w-full h-full">
-                    <h3>{{child.label}}</h3>
-                  </div>
-                  <p-divider></p-divider>
-                  <p>{{child.tooltip}}</p>
+              </div>
+              <div class="field col-7 md:col-6 m-auto">
+                <div class="w-full h-full">
+                  <h3>{{child.label}}</h3>
                 </div>
-              }
-              @else {
-                <div class="field col-7 m-auto">
-                  <div class="w-full h-full">
-                    <h3>{{child.label}}</h3>
-                  </div>
-                  <p-divider></p-divider>
-                  <p>{{child.tooltip}}</p>
-                </div>
-                 <div class="field col-4 m-auto border-1 border-gray-200 border-round-3xl">
-                  <div class="p-2">
-                    <h1><i [class]="child.icon + ' text-3xl'"></i></h1>
-                  </div>
-                </div>
-              }
+                <p-divider></p-divider>
+                <p>{{child.tooltip}}</p>
+              </div>
             </div>
           }
+        }
+        @else {
+          @for (child of item.items; track $index) {
+            <div class="grid" style="margin: 2rem 0;">
+              <div class="field col-7 md:col-6 m-auto">
+                <div class="w-full h-full">
+                  <h3>{{child.label}}</h3>
+                </div>
+                <p-divider></p-divider>
+                <p>{{child.tooltip}}</p>
+              </div>
+              <div class="field col-4 md:col-3 m-auto border-1 border-gray-200 border-round-3xl">
+                <div class="p-2">
+                  <h1><i [class]="child.icon + ' text-3xl'"></i></h1>
+                </div>
+              </div>
+            </div>
+          }
+        }
+
       </div>
 
     }
