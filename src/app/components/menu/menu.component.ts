@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { MenuItem, PrimeIcons } from "primeng/api";
-import { MenuService } from "../../services/utils/menu.service";
+import { MenuItem } from "primeng/api";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { SettingsComponent } from "../settings/settings.component";
 import { Router } from "@angular/router";
+import { MenuService } from "../../core/services/menu.service";
 
 @Component({
   selector: "app-menu",
@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
   }
   //#endregion
 
-  //#region Members :: OnExpandOrCollapseRoot(), onExpandOrCollapseChild(), collapseAll()
+  //#region Members 'Expand && Collapse' :: OnExpandOrCollapseRoot(), onExpandOrCollapseChild(), collapseAll()
 
   /**
    * @description Expande ou colapsa a barra de navegação. Usado para mobile
@@ -77,15 +77,31 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  public navigateTo(parentRouterLink: string, target: string, routerLink: string): void {
-    let url: string = parentRouterLink + "/" + target + "/" + routerLink;
+  //#endregion
+
+  //#region Members 'General' :: navigateTo(), openSettings()
+
+  /**
+   * @description navega para a rota especifica
+   * @param {string} parentRouterLink Rota do pai
+   * @param {string} middleField Meio campo da rota
+   * @param {string} routerLink Rota
+   * @returns {void}
+   */
+  public navigateTo(parentRouterLink: string, middleField: string, routerLink: string): void {
+    let url: string = parentRouterLink + "/" + middleField + "/" + routerLink;
     this.router.navigate([url]);
+
     this.collapseAll();
     this.expanded = false;
   }
 
+  /**
+   * @description Abre o painél para configuração
+   * @returns {void}
+   */
   public openSettings(): void {
-    this.settingsDialogRef = this.dialogService.open(SettingsComponent ,{
+    this.settingsDialogRef = this.dialogService.open(SettingsComponent, {
       styleClass: "w-11 max-w-30rem p-2",
       closable: true,
       draggable: false

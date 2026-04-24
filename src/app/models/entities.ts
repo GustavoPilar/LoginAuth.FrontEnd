@@ -1,5 +1,5 @@
 import { SafeUrl } from "@angular/platform-browser";
-import { EntityBase } from "./base/entity-base";
+import { EntityBase } from "./interfaces/entity-base";
 
 // Crud
 export class ExempleOne extends EntityBase {

@@ -1,4 +1,4 @@
-import { MenuItem, PrimeIcons } from "primeng/api";
+import { MenuItem } from "primeng/api";
 
 export const Settings = {
   showMenu: true as boolean,

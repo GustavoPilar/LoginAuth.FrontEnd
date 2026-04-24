@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { EntityBase } from "../../../models/base/entity-base";
 import { CrudBaseComponent } from "./crud-base";
 import { ApiService } from "../../../services/communication/api.service";
 
@@ -11,11 +10,14 @@ export class CrudManagerService {
 
   //#region Fields
 
-  public entityName!: string;
+  /** Nome da entidade */
+  private entityName!: string;
 
-  public entityId!: number;
+  /** Id da entidade */
+  private entityId?: number;
 
-  public crudBaseComponent!: CrudBaseComponent;
+  /** Componente do CrudBase */
+  private crudBaseComponent!: CrudBaseComponent;
 
   //#region Constructor
   constructor(
@@ -27,6 +29,11 @@ export class CrudManagerService {
 
   //#region Members 'Init' :: Initialize
 
+  /**
+   * @description Inicia as variáveis
+   * @param crudBaseComponent Componente do CrudBase
+   * @returns {void}
+   */
   public Initialize(crudBaseComponent: CrudBaseComponent): void {
     this.crudBaseComponent = crudBaseComponent;
 
@@ -51,10 +58,10 @@ export class CrudManagerService {
    * @returns {Observable<any>}
    */
   public GetEntityById(): Observable<any> {
-    
+
     if (this.entityId == undefined)
       return of({id: 0});
-    
+
     return this.apiService.GetEntityById(this.entityName, this.entityId);
   }
 
@@ -68,7 +75,7 @@ export class CrudManagerService {
    */
   public CreateEntity(): Observable<any> {
     let entity: any = this.crudBaseComponent.prepareEntityToSave()
-    
+
     if (this.entityId && this.entityId > 0) {
       entity.id = this.entityId;
       return this.UpdateEntity(entity);
