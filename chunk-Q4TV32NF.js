@@ -1,0 +1,1 @@
+import{I as r,M as e,Vd as n}from"./chunk-OZ3MBTFC.js";var o=class i{constructor(t){this.spinner=t}Hide(){this.spinner.hide()}Show(){this.spinner.show()}static \u0275fac=function(c){return new(c||i)(e(n))};static \u0275prov=r({token:i,factory:i.\u0275fac,providedIn:"root"})};export{o as a};
