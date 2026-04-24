@@ -11,16 +11,16 @@ export class HeaderComponent {
   //#region Fields
 
   @Input()
-  public title: string | null = null;
+  public title!: string;
 
   @Input()
-  public subTitle: string | null = null;
+  public subTitle!: string;
 
   @Input()
-  public description: string | null = null
+  public description!: string;
 
   @Input()
-  public icon: string | null = null;
+  public icon: string = "";
 
   //#endregion
 

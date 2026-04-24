@@ -13,7 +13,7 @@ export class CrudComponent implements OnInit {
 
   //#region Fields
 
-  public mangerItem!: MenuItem;
+  public manager: MenuItem;
 
   //#endregion
 
@@ -22,8 +22,10 @@ export class CrudComponent implements OnInit {
     private menuService: MenuService,
     private router: Router
   ) {
+    this.manager = this.menuService.GetManager();
+
     Settings.breadCrumbItems = [
-      { label: "Gerenciamento", icon: PrimeIcons.PENCIL }
+      { label: this.manager.label, icon: this.manager.icon }
     ]
   }
   //#endregion
@@ -31,7 +33,7 @@ export class CrudComponent implements OnInit {
   //#region Members 'On' :: ngOnInit
 
   public ngOnInit(): void {
-    this.mangerItem = this.menuService.GetManager();
+
   }
 
   //#endregion
@@ -39,7 +41,9 @@ export class CrudComponent implements OnInit {
   //#region Members :: navigateTo()
 
   public navigateTo(routerLink: string): void {
-    this.router.navigate(["manager/list", routerLink]);
+    let route: string = this.manager.routerLink + routerLink;
+
+    this.router.navigate([route]);
   }
 
   //#endregion

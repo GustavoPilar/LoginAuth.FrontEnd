@@ -1,4 +1,4 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationModule, NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
@@ -21,7 +21,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CardModule } from 'primeng/card';
 import { AboutComponent } from './pages/about/about.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { CrudModule } from './modules/crud/crud.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
-    ReactiveFormsModule,
+    CrudModule,
+    ApplicationModule,
 
+    ReactiveFormsModule,
     InputTextModule,
     PasswordModule,
     ButtonModule,

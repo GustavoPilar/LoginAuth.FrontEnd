@@ -11,10 +11,10 @@
           <p-divider></p-divider>
         </ng-template>
         <ng-template #content>
-          {{item?.tooltip ?? 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, aperiam' }}
+          {{item?.tooltip}}
         </ng-template>
         <ng-template #footer>
-          <p-button variant="text" label="Acessar" icon="pi pi-arrow-up" iconPos="right" (onClick)="navigateTo(item?.routerLink)"></p-button>
+          <p-button variant="text" label="Acessar" icon="pi pi-arrow-up" iconPos="right" (onClick)="navigateTo(item?.routerLink, item?.target)"></p-button>
         </ng-template>
       </p-card>
     }

@@ -14,29 +14,35 @@ export class MenuService {
     }
     //#endregion
 
-    //#region Members 'create' :: CreateManager(), CreateApplication, CreateReports()
+    //#region Members 'create' :: CreateManager(), CreateSystem, CreateReports()
 
     private createManager(): MenuItem {
         const root: MenuItem = {
             label: "Gerenciamento",
             icon: PrimeIcons.PENCIL,
+            tooltip: "Com um clique você pode começar a alimentar o seu sistema!",
             expanded: false,
-            routerLink: "manager",
+            routerLink: "manager/",
             items: [
-              { label: "Exemplo 1", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", target: "list", routerLink: "exempleOne" },
-              { label: "Exemplo 2", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", target: "list", routerLink: "exempleTwo" },
+              { label: "Exemplo 1", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", target: "list/", routerLink: "exempleOne" },
+              { label: "Exemplo 2", icon: PrimeIcons.HASHTAG, tooltip: "Um exemplo de opção para gerenciamento", target: "list/", routerLink: "exempleTwo" },
             ]
         }
 
         return root;
     }
 
-    private createApplication(): MenuItem {
+    private createSystem(): MenuItem {
         const root: MenuItem = {
-            label: "Aplicação",
+            label: "Sistema",
             icon: PrimeIcons.DESKTOP,
+            tooltip: "Veja do que o sistema é capaz de fornecer e fazer!",
             expanded: false,
-            items: []
+            routerLink: "system/",
+            items: [
+              { label: "Aulas", icon: PrimeIcons.PLAY_CIRCLE, tooltip: "Veja ou rejeva as aulas que estão disponíveis", target: "class/", routerLink: "videoLesson" },
+              { label: "Provas / Simulados", icon: PrimeIcons.FILE_CHECK, tooltip: "Realize provas ou simulados para testar seus conhecimentos", target: "class/", routerLink: "classTest" },
+            ]
         }
 
         return root;
@@ -46,6 +52,7 @@ export class MenuService {
         const root: MenuItem = {
             label: "Relatório",
             icon: PrimeIcons.FILE,
+            tooltip: "Deseja saber sobre estatísticas de seu sistema? Aqui é o lugar certo!",
             expanded: false,
             items: []
         }
@@ -60,7 +67,7 @@ export class MenuService {
     public GetMenus(): MenuItem[] {
         return [
             this.GetManager(),
-            this.GetApplication(),
+            this.GetSystem(),
             this.GetReport()
         ]
     }
@@ -69,8 +76,8 @@ export class MenuService {
       return this.createManager();
     }
 
-    public GetApplication(): MenuItem {
-      return this.createApplication();
+    public GetSystem(): MenuItem {
+      return this.createSystem();
     }
     public GetReport(): MenuItem {
       return this.createReport();

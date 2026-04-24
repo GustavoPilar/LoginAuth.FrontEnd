@@ -4,7 +4,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
-import { CrudModule } from './modules/crud/crud.module';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -12,6 +11,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "about", component: AboutComponent },
   { path: "manager", loadChildren: () => import("./modules/crud/crud.module").then(cm => cm.CrudModule) },
+  { path: "system", loadChildren: () => import("./modules/system/system.module").then(sm => sm.SystemModule) },
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "**", redirectTo: "/home", pathMatch: "full" },
 ];

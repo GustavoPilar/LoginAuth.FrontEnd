@@ -5,15 +5,15 @@ import { Router } from "@angular/router";
 import { Settings } from "../../core/settings";
 
 @Component({
-  selector: "app-application",
+  selector: "app-system",
   standalone: false,
-  templateUrl: "./application.component.htm",
+  templateUrl: "./system.component.html",
 })
-export class ApplicationComponent implements OnInit {
+export class SystemComponent implements OnInit {
 
   //#region Fields
 
-  public applicationItem!: MenuItem;
+  public system!: MenuItem;
 
   //#endregion
 
@@ -31,7 +31,7 @@ export class ApplicationComponent implements OnInit {
   //#region Members 'On' :: ngOnInit
 
   public ngOnInit(): void {
-    this.applicationItem = this.menuService.GetApplication();
+    this.system = this.menuService.GetSystem();
   }
 
   //#endregion
@@ -39,7 +39,8 @@ export class ApplicationComponent implements OnInit {
   //#region Members :: navigateTo()
 
   public navigateTo(routerLink: string): void {
-    this.router.navigate([this.applicationItem.routerLink, routerLink]);
+    const url: string = this.system.routerLink + routerLink;
+    this.router.navigate([url]);
   }
 
   //#endregion

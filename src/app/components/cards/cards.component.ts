@@ -24,8 +24,15 @@ export class CardsComponent {
 
   //#region
 
-  public navigateTo(routerLink: string): void {
-    this.onRouter.emit(routerLink);
+  public navigateTo(routerLink: string, target?: string): void {
+    let route: string = "";
+
+    if (target)
+      route += target;
+
+    route += routerLink;
+
+    this.onRouter.emit(route);
   }
 
   //#endregion

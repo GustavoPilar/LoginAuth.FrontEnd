@@ -1,0 +1,35 @@
+<app-header
+  title="Provas e Simulados"
+  description="Realize provas e/ou simulados para testar seus conhecimentos"
+></app-header>
+
+<div class="w-full p-2">
+
+  <div class="text-center">
+    <h1 class="text-center">Prova</h1>
+    <small>Prova ficticia</small>
+  </div>
+
+  <form [formGroup]="questionForm">
+    <div class="grid my-2">
+      @for (question of questions; track $index) {
+        <div class="field col-12 text-justify">
+          <label>Questão {{$index + 1}}: {{question.title}}</label>
+          <div>
+            @for (option of question.options; track $index) {
+              <div class="flex items-center my-3">
+                <p-radiobutton [inputId]="'question' + question.id + 'question' + option.id" [name]="'question' + question.id" [value]="option.value" [formControlName]="question.id" />
+                <label [for]="'question' + question.id + 'question' + option.id" class="ml-2"> {{ option.label }} </label>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="field col-12">
+        <p-button label="Finalizar" icon="pi pi-check" fluid [disabled]="!canSave()"></p-button>
+      </div>
+    </div>
+  </form>
+
+</div>
