@@ -1,0 +1,1 @@
+import{$ as i,Gb as n,_c as a,ca as o,va as r,wd as l,ya as d}from"./chunk-NRZN5ICL.js";var v=(()=>{class e extends l{modelValue=i(void 0);$filled=n(()=>a(this.modelValue()));writeModelValue(t){this.modelValue.set(t)}static \u0275fac=(()=>{let t;return function(m){return(t||(t=o(e)))(m||e)}})();static \u0275dir=r({type:e,features:[d]})}return e})();export{v as a};
