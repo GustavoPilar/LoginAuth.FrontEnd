@@ -3,11 +3,12 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ReportComponent } from "./report.component";
 import { GeneralReportComponent } from "./general/general-report.component";
+import { authGuard } from "../../core/guards/auth-guards";
 
 export const routes: Routes = [
-  { path: "", component: ReportComponent },
+  { path: "", component: ReportComponent, canActivate: [authGuard] },
 
-  { path: "general", component: GeneralReportComponent }
+  { path: "general", component: GeneralReportComponent, canActivate: [authGuard] }
 ]
 
 @NgModule({

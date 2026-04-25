@@ -1,5 +1,6 @@
+import { ApiService } from './../../../services/communication/api.service';
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
 import { CrudManagerService } from "./crud-manager.service";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { DialogService } from "primeng/dynamicdialog";
@@ -58,6 +59,7 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
   //#region Constructor
   constructor(
     public crudManagerService: CrudManagerService,
+    protected apiService: ApiService,
     protected formBuilder: FormBuilder,
     protected messageService: MessageService,
     protected confirmationService: ConfirmationService,
@@ -139,7 +141,7 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
       .subscribe({
         next: (result) => {
 
-          this.initForm();
+          this.entityForm = this.initForm();
           this.loaderService.Hide();
           this.refreshSubject$.next(true);
         },
@@ -164,7 +166,7 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
    * @abstract
    * @returns {vooid}
    */
-  protected abstract initForm(): void;
+  protected abstract initForm(): FormGroup;
 
   /**
    * @description Informa se o formulário é válid ou não para salvar
@@ -185,6 +187,11 @@ export abstract class CrudBaseComponent<Entity = EntityBase> implements OnInit, 
     let entity: Entity = this.entityForm.value;
 
     return entity;
+  }
+
+  public getField(field: string): AbstractControl {
+    console.log(this.entityForm);
+    return this.entityForm.controls[field] as AbstractControl;
   }
 
   //#endregion

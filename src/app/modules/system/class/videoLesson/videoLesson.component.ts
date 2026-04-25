@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, inject, OnDestroy, OnInit } from "@angular/core";
 import { VideoLesson } from "../../../../models/entities";
-import { DomSanitizer } from "@angular/platform-browser";
-import { Settings } from "../../../../core/settings";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { PrimeIcons } from "primeng/api";
 
 @Component({
@@ -23,10 +22,6 @@ export class VideoLessonComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
 
   ) {
-    Settings.breadCrumbItems = [
-      { icon: PrimeIcons.DESKTOP, routerLink: "system/" },
-      { label: "Video Aula", icon: PrimeIcons.PLAY_CIRCLE }
-    ]
   }
   //#endregion
 
@@ -38,22 +33,19 @@ export class VideoLessonComponent implements OnInit, AfterViewInit, OnDestroy {
         id: 0,
         name: "Música",
         description: "Vídeo com música calma",
-        url: "",
-        safeURL: this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube-nocookie.com/embed/BNhiW3r6zy4?si=VXylXqmSZabSyAbF")
+        url: "https://www.youtube-nocookie.com/embed/BNhiW3r6zy4?si=VXylXqmSZabSyAbF"
       },
       {
         id: 1,
         name: "Música",
         description: "Vídeo com música calma",
-        url: "",
-        safeURL: this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube-nocookie.com/embed/BNhiW3r6zy4?si=VXylXqmSZabSyAbF")
+        url: "https://www.youtube-nocookie.com/embed/BNhiW3r6zy4?si=VXylXqmSZabSyAbF"
       },
       {
         id: 2,
         name: "Música",
         description: "Vídeo com música calma",
-        url: "",
-        safeURL: this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube-nocookie.com/embed/BNhiW3r6zy4?si=VXylXqmSZabSyAbF")
+        url: "https://www.youtube-nocookie.com/embed/BNhiW3r6zy4?si=VXylXqmSZabSyAbF"
       },
     ]
   }
@@ -64,6 +56,14 @@ export class VideoLessonComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
 
+  }
+
+  //#endregion
+
+  //#region Members 'General' :: getSanatizerUrl()
+
+  public getSantizerUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   //#endregion

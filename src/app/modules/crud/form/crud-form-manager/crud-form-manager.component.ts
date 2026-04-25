@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Settings } from "../../../../core/settings";
 import { PrimeIcons } from "primeng/api";
 import { CrudFormComponent } from "../crud-form/crud-form.component";
 
@@ -27,12 +26,6 @@ export class CrudFormManagerComponent implements OnInit, AfterViewInit {
   ) {
     this.entityName = this.activatedRoute.snapshot.params["entityName"];
     this.entityId = this.activatedRoute.snapshot.params["entityId"];
-
-    Settings.breadCrumbItems = [
-      { icon: PrimeIcons.PENCIL, routerLink: "manager" },
-      { icon: PrimeIcons.LIST, routerLink: "manager/list/" + this.entityName },
-      { label: this.entityName, icon: PrimeIcons.FILE_EDIT },
-    ]
   }
   //#endregion
 

@@ -13,8 +13,8 @@ export class CardsComponent {
   @Input()
   public items: MenuItem[] = [];
 
-  @Output()
-  public onRouter: EventEmitter<string> = new EventEmitter<string>();
+  @Input()
+  public parent?: MenuItem;
 
   //#endregion
 
@@ -24,15 +24,8 @@ export class CardsComponent {
 
   //#region
 
-  public navigateTo(routerLink: string, target?: string): void {
-    let route: string = "";
-
-    if (target)
-      route += target;
-
-    route += routerLink;
-
-    this.onRouter.emit(route);
+  public navigate(item: MenuItem): void {
+    item.command!.call(item, {item: item, parent: this.parent});
   }
 
   //#endregion

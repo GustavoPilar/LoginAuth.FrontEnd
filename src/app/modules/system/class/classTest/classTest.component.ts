@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Settings } from "../../../../core/settings";
 import { PrimeIcons } from "primeng/api";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
@@ -24,10 +23,6 @@ export class ClassTestComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder
   ) {
-    Settings.breadCrumbItems = [
-      { icon: PrimeIcons.DESKTOP, routerLink: "system/" },
-      { label: "Provas / Simulados", icon: PrimeIcons.FILE_CHECK }
-    ]
   }
   //#endregion
 

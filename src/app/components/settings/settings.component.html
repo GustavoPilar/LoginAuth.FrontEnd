@@ -8,10 +8,10 @@
 </p-confirmDialog>
 
 <div class="w-full p-2">
-  @for (item of items; track $index) {
+  <!-- @for (item of items; track $index) {
     <p-button variant="text" severity="contrast" [label]="item.label" [icon]="item.icon" size="small" fluid (onClick)="navigateTo(item.target!)"></p-button>
     <p-divider></p-divider>
-  }
+  } -->
 
   <p-button variant="text" severity="danger" label="Sair" icon="pi pi-power-off" size="small" fluid (onClick)="openConfirm()"></p-button>
 </div>

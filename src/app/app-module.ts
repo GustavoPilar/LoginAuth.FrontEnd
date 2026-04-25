@@ -19,19 +19,19 @@ import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { CardModule } from 'primeng/card';
-import { AboutComponent } from './pages/about/about.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CrudModule } from './modules/crud/crud.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReportModule } from './modules/report/report.module';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
     App,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
-    AboutComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +52,7 @@ import { ReportModule } from './modules/report/report.module';
     CheckboxModule,
     CardModule,
     BreadcrumbModule,
+    ToastModule,
 
     NgxSpinnerModule.forRoot({ type: "ball-atom" })
   ],
@@ -66,6 +67,8 @@ import { ReportModule } from './modules/report/report.module';
         },
       },
     }),
+
+    MessageService
   ],
   bootstrap: [App],
 })

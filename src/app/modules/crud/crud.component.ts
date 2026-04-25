@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { MenuService } from "../../services/utils/menu.service";
 import { Router } from "@angular/router";
 import { MenuItem, PrimeIcons } from "primeng/api";
-import { Settings } from "../../core/settings";
+import { MenuService } from "../../core/services/menu.service";
+import { SettingsService } from "../../core/services/settings.service";
 
 @Component({
   selector: "app-crud",
@@ -20,13 +20,16 @@ export class CrudComponent implements OnInit {
   //#region Constructor
   constructor(
     private menuService: MenuService,
+    private settingsService: SettingsService,
     private router: Router
   ) {
-    this.manager = this.menuService.GetManager();
+    this.settingsService.currentParentMenuItem = this.menuService.GetManager();
+    this.settingsService.currentMenuItems = this.settingsService.currentParentMenuItem.items!;
 
-    Settings.breadCrumbItems = [
-      { label: this.manager.label, icon: this.manager.icon }
-    ]
+    const current: MenuItem = this.settingsService.currentParentMenuItem;
+    this.settingsService.currentHeader = { title: current.label!, description: current.tooltip, icon: current.icon };
+
+    this.manager = this.menuService.GetManager();
   }
   //#endregion
 

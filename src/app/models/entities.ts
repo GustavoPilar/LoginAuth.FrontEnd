@@ -2,22 +2,33 @@ import { SafeUrl } from "@angular/platform-browser";
 import { EntityBase } from "./interfaces/entity-base";
 
 // Crud
-export class ExempleOne extends EntityBase {
 
-}
+/** Produto */
+export class Product extends EntityBase {
 
-export class ExempleTwo extends EntityBase {
+  //#region Fields
 
-  age!: number;
+  /** Preço do produto */
+  price!: number;
+
+  /** Data de registro */
+  registerDate!: Date;
+
+  //#endregion
 
 }
 
 // System
+
+/** Aula de video */
 export class VideoLesson extends EntityBase {
 
+  //#region Fields 
+  
+  /** URL do vídeo */
   url!: string;
 
-  safeURL?: SafeUrl;
+  //#endregion
 
 }
 

@@ -23,13 +23,13 @@ export class ApiService {
     public GetEntities(entityName: string): Observable<any> {
         const url: string = `${API_URL}/${entityName}`;
 
-        return this.httpClient.get(url, { headers: { "Content-Type" : "appliation/json" } });
+        return this.httpClient.get(url, { headers: { "Content-Type" : "application/json" } });
     }
 
     public GetEntityById(entityName: string, entityId: number): Observable<any> {
         const url: string = `${API_URL}/${entityName}/${entityId}`;
 
-        return this.httpClient.get(url, { headers: { "Content-Type" : "appliation/json" } });
+        return this.httpClient.get(url, { headers: { "Content-Type" : "application/json" } });
     }
 
     //#endregion
@@ -39,7 +39,7 @@ export class ApiService {
     public CreateEntity(entityName: string, entity: any): Observable<any> {
         const url: string = `${API_URL}/${entityName}`;
 
-        return this.httpClient.post(url, entity, { headers: { "Content-Type" : "appliation/json" } });
+        return this.httpClient.post(url, entity, { headers: { "Content-Type" : "application/json" } });
     }
 
     //#endregion
@@ -49,7 +49,7 @@ export class ApiService {
     public UpdateEntity(entityName: string, entity: any): Observable<any> {
         const url: string = `${API_URL}/${entityName}/${entity.id}`;
 
-        return this.httpClient.put(url, entity, { headers: { "Content-Type" : "appliation/json" } });
+        return this.httpClient.put(url, entity, { headers: { "Content-Type" : "application/json" } });
     }
 
     //#endregion
@@ -59,7 +59,7 @@ export class ApiService {
     public DeleteEntity(entityName: string, entityId: number): Observable<any> {
         const url: string = `${API_URL}/${entityName}/${entityId}`;
 
-        return this.httpClient.delete(url, { headers: { "Content-Type" : "appliation/json" } });
+        return this.httpClient.delete(url, { headers: { "Content-Type" : "application/json" } });
     }
 
     //#endregion

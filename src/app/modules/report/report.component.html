@@ -1,9 +1,0 @@
-<app-header
-  [title]="report.label!"
-  [icon]="report.icon!"
-  [description]="report.tooltip!"
-></app-header>
-
-<div class="fluid p-2">
-  <app-cards [items]="report.items!" (onRouter)="navigateTo($event)"></app-cards>
-</div>

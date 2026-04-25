@@ -1,19 +1,28 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-atom" [fullScreen] = "true"></ngx-spinner>
 
 <div class="w-full w-11 m-auto" style="max-width: 80rem;">
-  @if (settings.showMenu) {
+  @if (settingsService.showMenu) {
     <app-menu></app-menu>
   }
 
-  @if (settings.showBreadCrumb) {
-    <p-breadcrumb [model]="settings.breadCrumbItems" [home]="breadCumbHome"></p-breadcrumb>
+  @if (settingsService.showBreadCrumb) {
+    <p-breadcrumb [model]="breadcrumbService.getItems()" [home]="breadcrumbService.getHome()" (onItemClick)="clickItem($event)"></p-breadcrumb>
   }
 
+  @if (settingsService.showHeader) {
+    <app-header [header]="settingsService.currentHeader"></app-header>
+  }
 
+  @if (settingsService.showCards) {
+    <app-cards
+      [items]="settingsService.currentMenuItems"
+      [parent]="settingsService.currentParentMenuItem"
+    ></app-cards>
+  }
+  
   <router-outlet />
 
-
-  @if (settings.showCreatedBy) {
+  @if (settingsService.showCreatedBy) {
     <app-created-by></app-created-by>
   }
 </div>

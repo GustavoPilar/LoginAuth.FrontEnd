@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CrudListComponent } from "../crud-list/crud-list.component";
-import { Settings } from "../../../../core/settings";
 import { PrimeIcons } from "primeng/api";
+import { SettingsService } from "../../../../core/services/settings.service";
 
 @Component({
   selector: "app-crud-list-manager",
@@ -22,14 +22,10 @@ export class CrudListManagerComponent implements OnInit, AfterViewInit {
 
   //#region Constructor
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private settingsService: SettingsService
   ) {
     this.entityName = this.activatedRoute.snapshot.params["entityName"];
-
-    Settings.breadCrumbItems = [
-      { icon: PrimeIcons.PENCIL, routerLink: "manager" },
-      { label: this.entityName, icon: PrimeIcons.LIST, routerLink: "manager/list/" + this.entityName },
-    ]
   }
   //#endregion
 

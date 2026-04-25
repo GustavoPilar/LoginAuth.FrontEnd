@@ -13,6 +13,7 @@ import { ConfirmationService } from "primeng/api";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { HeaderComponent } from "./header/header.component";
 import { CardsComponent } from "./cards/cards.component";
+import { LabelComponent } from "./label/label.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CardsComponent } from "./cards/cards.component";
     CreatedByComponent,
     SettingsComponent,
     HeaderComponent,
-    CardsComponent
+    CardsComponent,
+    LabelComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { CardsComponent } from "./cards/cards.component";
     MenuComponent,
     CreatedByComponent,
     HeaderComponent,
-    CardsComponent
+    CardsComponent,
+    LabelComponent
   ],
   providers: [
     DialogService,

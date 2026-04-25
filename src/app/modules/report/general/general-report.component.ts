@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Settings } from "../../../core/settings";
 import { PrimeIcons } from "primeng/api";
 
 @Component({
@@ -13,10 +12,6 @@ export class GeneralReportComponent implements OnInit {
   basicOptions: any;
 
   constructor() {
-    Settings.breadCrumbItems = [
-      { icon: PrimeIcons.DESKTOP, routerLink: "report/" },
-      { label: "Relatório geral", icon: PrimeIcons.EYE },
-    ]
   }
 
   public ngOnInit(): void {

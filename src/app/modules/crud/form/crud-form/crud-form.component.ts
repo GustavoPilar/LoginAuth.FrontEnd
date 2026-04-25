@@ -1,10 +1,10 @@
-import { LoaderService } from './../../../../services/utils/loader.service';
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { CrudBaseComponent } from "../../base/crud-base";
-import { BehaviorSubject, pipe, Subject, takeUntil } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { ConfirmDialog } from "primeng/confirmdialog";
 import { Router } from "@angular/router";
+import { LoaderService } from "../../../../core/services/loader.service";
 
 @Component({
   selector: "app-crud-form",
@@ -156,7 +156,7 @@ export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public save(): void {
     this.laoderService.Show();
-    this.crudBaseComponent.crudManagerService.CreateEntity()
+    this.crudBaseComponent.crudManagerService.CreateEntity(this.crudBaseComponent.prepareEntityToSave())
       .pipe(
         takeUntil(this.destroySubs$)
       ).subscribe({
@@ -168,7 +168,7 @@ export class CrudFormComponent implements OnInit, AfterViewInit, OnDestroy {
           this.messageService.add({
             severity: "error",
             summary: "Erro",
-            detail: "Erro ao salvar.\nTenta novamente."
+            detail: "Erro ao salvar.\nTente novamente."
           });
           this.laoderService.Hide();
         }

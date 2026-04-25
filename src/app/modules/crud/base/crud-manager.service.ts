@@ -16,9 +16,6 @@ export class CrudManagerService {
   /** Id da entidade */
   private entityId?: number;
 
-  /** Componente do CrudBase */
-  private crudBaseComponent!: CrudBaseComponent;
-
   //#region Constructor
   constructor(
     private apiService: ApiService
@@ -31,14 +28,12 @@ export class CrudManagerService {
 
   /**
    * @description Inicia as variáveis
-   * @param crudBaseComponent Componente do CrudBase
    * @returns {void}
    */
   public Initialize(crudBaseComponent: CrudBaseComponent): void {
-    this.crudBaseComponent = crudBaseComponent;
 
-    this.entityName = this.crudBaseComponent.entityName;
-    this.entityId = this.crudBaseComponent.entityId;
+    this.entityName = crudBaseComponent.entityName;
+    this.entityId = crudBaseComponent.entityId;
   }
 
   //#region Members 'ApiRequest' :: HttpGet, HttpPost, HttpPut, HttpDelete
@@ -73,15 +68,14 @@ export class CrudManagerService {
    * @description Cria o resgistro de uma entidade
    * @returns {Observable<any>}
    */
-  public CreateEntity(): Observable<any> {
-    let entity: any = this.crudBaseComponent.prepareEntityToSave()
+  public CreateEntity(entityToSave: any): Observable<any> {
 
     if (this.entityId && this.entityId > 0) {
-      entity.id = this.entityId;
-      return this.UpdateEntity(entity);
+      entityToSave.id = this.entityId;
+      return this.UpdateEntity(entityToSave);
     }
 
-    return this.apiService.CreateEntity(this.entityName, entity);
+    return this.apiService.CreateEntity(this.entityName, entityToSave);
   }
 
   //#endregion

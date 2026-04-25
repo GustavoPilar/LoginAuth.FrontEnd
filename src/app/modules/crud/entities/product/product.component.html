@@ -1,0 +1,42 @@
+@if (isForm && entityForm) {
+    <form [formGroup]="entityForm">
+        <div class="grid">
+            <div class="field col-12 md:col-6">
+                <p-floatlabel variant="on">
+                    <p-icon-field>
+                        <p-inputicon class="pi pi-hashtag"></p-inputicon>
+                        <input type="text" pInputText id="name" formControlName="name" placeholder="Digite o nome do produto" fluid>
+                    </p-icon-field>
+                    <app-label for="name" title="Nome" [control]="getField('name')"></app-label>
+                </p-floatlabel>
+            </div>
+            <div class="field col-12 md:col-6">
+                <p-float-label variant="on">
+                    <p-icon-field>
+                        <p-inputicon class="pi pi-pencil"></p-inputicon>
+                        <input type="text" pInputText id="description" formControlName="description" placeholder="Digite a descrição do exemplo" fluid>
+                    </p-icon-field>
+                    <app-label for="description" title="Descrição" [control]="getField('description')"></app-label>
+                </p-float-label>
+            </div>
+            <div class="field col-12 md:col-6">
+                <p-float-label variant="on">
+                    <p-icon-field>
+                        <p-inputicon class="pi pi-dollar"></p-inputicon>
+                        <p-inputNumber id="price" inputId="price" formControlName="price" placeholder="Digite o preço" suffix=" reais" mode="currency" currency="BRL" fluid [showClear]="true"></p-inputNumber>
+                    </p-icon-field>
+                    <app-label for="price" title="Preço" [control]="getField('price')"></app-label>
+                </p-float-label>
+            </div>
+            <div class="field col-12 md:col-6">
+                <p-float-label variant="on">
+                    <p-icon-field>
+                        <p-inputicon class="pi pi-calendar"></p-inputicon>
+                        <p-date-picker id="registerDate" inputId="registerDate" formControlName="registerDate" placeholder="Selecione a data do cadastro" fluid [showClear]="true" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-date-picker>
+                    </p-icon-field>
+                    <app-label for="registerDate" title="Data de cadastro" [control]="getField('registerDate')"></app-label>
+                </p-float-label>
+            </div>
+        </div>
+    </form>
+}

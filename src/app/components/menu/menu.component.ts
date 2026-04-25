@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit {
 
   //#region Members 'On' :: OnInit
   public ngOnInit(): void {
-    this.items = this.menuService.GetMenus();
+    this.items = this.menuService.GetAll();
   }
   //#endregion
 

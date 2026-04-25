@@ -34,8 +34,6 @@ export class SettingsComponent implements OnInit {
     this.dynamicConfig.header = "Configuração";
 
     this.items = [
-      { label: "Conta de usuário", icon: PrimeIcons.USER, target: "account" },
-      { label: "Preferências", icon: PrimeIcons.PALETTE, target: "preferences" },
       { label: "Sobre o sistema", icon: PrimeIcons.QUESTION_CIRCLE, target: "about" },
     ]
   }

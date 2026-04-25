@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MenuItem, PrimeIcons } from "primeng/api";
-import { MenuService } from "../../services/utils/menu.service";
+import { MenuService } from "../../core/services/menu.service";
 import { Router } from "@angular/router";
-import { Settings } from "../../core/settings";
+import { SettingsService } from "../../core/services/settings.service";
 
 @Component({
   selector: "app-report",
@@ -13,34 +13,21 @@ export class ReportComponent implements OnInit {
 
   //#region Fields
 
-  public report!: MenuItem;
-
   //#endregion
 
   //#region Constructor
   constructor(
     private menuService: MenuService,
-    private router: Router
+    private settingsService: SettingsService
   ) {
-    Settings.breadCrumbItems = [
-      { label: "Relatório", icon: PrimeIcons.DESKTOP }
-    ]
+    
   }
   //#endregion
 
   //#region Members 'On' :: ngOnInit
 
   public ngOnInit(): void {
-    this.report = this.menuService.GetReport();
-  }
-
-  //#endregion
-
-  //#region Members :: navigateTo()
-
-  public navigateTo(routerLink: string): void {
-    const url: string = this.report.routerLink + routerLink;
-    this.router.navigate([url]);
+    this.settingsService.UpdateItems(this.menuService.GetReport());
   }
 
   //#endregion

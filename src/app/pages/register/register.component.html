@@ -1,9 +1,5 @@
-<app-header
-  title="Login Auth"
-  icon="pi pi-lock"
-  subTitle="Crie sua conta"
-  description="Preencha os dados abaixo para se cadastrar"
-></app-header>
+<p-toast key="success"></p-toast>
+<p-toast key="error"></p-toast>
 
 <div class="fluid p-2">
 
@@ -19,7 +15,7 @@
             <label for="fullName">Nome completo</label>
           </p-floatlabel>
         </div>
-        <div class="field col-12" [hidden]="!form.get('fullName')!.value">
+        <div class="field col-12">
           <p-floatlabel variant="over">
             <p-iconfield>
               <p-inputicon class="pi pi-at"></p-inputicon>
@@ -28,7 +24,7 @@
             <label for="email">E-mail</label>
           </p-floatlabel>
         </div>
-        <div class="field col-12" [hidden]="!form.get('email')!.value">
+        <div class="field col-12">
           <p-floatlabel variant="over">
             <p-iconfield>
               <p-inputicon class="pi pi-tag"></p-inputicon>
@@ -36,33 +32,49 @@
             </p-iconfield>
             <label for="userName">Nome de usuário</label>
           </p-floatlabel>
+          @if (hasUsernameError()) {
+            <small style="color: red;">Nome de usuário inválido.<br>Apenas letras, números e espaços</small>
+          }
         </div>
-        <div class="field col-12" [hidden]="!form.get('userName')!.value">
+        <div class="field col-12">
           <p-floatlabel variant="over">
             <p-iconfield>
               <p-inputicon class="pi pi-lock"></p-inputicon>
-              <p-password id="password" inputId="password" formControlName="password" fluid [feedback]="false" showClear toggleMask></p-password>
+              <p-password id="password" inputId="password" formControlName="password" fluid showClear toggleMask weakLabel="Senha fraca" promptLabel="Digite sua senha" mediumLabel="Senha média" strongLabel="Senha forte">
+                <ng-template #header>
+                  Segurança da senha
+                </ng-template>
+                <ng-template #footer>
+                  <p-divider></p-divider>
+                  <ul class="pl-2 my-0 leading-normal text-sm">
+                    <li>Mínimo de 8 digitos</li>
+                  </ul>
+                </ng-template>
+              </p-password>
             </p-iconfield>
             <label for="password">Senha</label>
           </p-floatlabel>
         </div>
-        <div class="field col-12" [hidden]="!form.get('password')!.value">
+        <div class="field col-12">
           <p-floatlabel variant="over">
             <p-iconfield>
               <p-inputicon class="pi pi-lock"></p-inputicon>
-              <p-password id="confirmPassword" inputId="confirmPassword" formControlName="confirmPassword" fluid [feedback]="false" showClear toggleMask></p-password>
+              <p-password id="confirmPassword" inputId="confirmPassword" formControlName="confirmPassword" fluid [feedback]="false" showClear toggleMask [invalid]="form.getError(this.fieldsMismatch)"></p-password>
             </p-iconfield>
             <label for="confirmPassword">Confirmar senha</label>
           </p-floatlabel>
+          @if (form.getError(this.fieldsMismatch)){
+            <small style="color: red; margin: 5px;">As senhas não conferem</small>
+          }
         </div>
-        <div class="field col-12 flex justify-content-between align-items-center text-sm" [hidden]="form.get('confirmPassword')!.value">
+        <div class="field col-12 flex justify-content-between align-items-center text-sm">
           <div class="flex gap-2">
-            <p-checkbox id="terms" inputId="terms" [binary]="true"></p-checkbox>
+            <p-checkbox id="terms" inputId="terms" formControlName="acceptTerms" [binary]="true"></p-checkbox>
             <label for="terms">Li e aceito os <a href="#" class="no-underline text-primary">Termos de Uso</a> e <a href="#" class="no-underline text-primary">Política de Privacidade</a></label>
           </div>
         </div>
         <div class="field col-12">
-          <p-button label="Cadastrar" fluid size="large" severity="primary" routerLink="/home"></p-button>
+          <p-button label="Cadastrar" fluid size="large" severity="primary" routerLink="/home" (onClick)="register()" [disabled]="!canRegister()"></p-button>
         </div>
       </div>
     </form>

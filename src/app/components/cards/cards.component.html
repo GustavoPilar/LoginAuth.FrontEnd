@@ -14,7 +14,7 @@
           {{item?.tooltip}}
         </ng-template>
         <ng-template #footer>
-          <p-button variant="text" label="Acessar" icon="pi pi-arrow-up" iconPos="right" (onClick)="navigateTo(item?.routerLink, item?.target)"></p-button>
+          <p-button variant="text" label="Acessar" icon="pi pi-arrow-up" iconPos="right" (onClick)="navigate(item)"></p-button>
         </ng-template>
       </p-card>
     }

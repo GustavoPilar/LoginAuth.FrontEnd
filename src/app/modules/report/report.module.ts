@@ -5,7 +5,6 @@ import { ComponentsModule } from "../../components/components.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ReportComponent } from "./report.component";
 import { GeneralReportComponent } from "./general/general-report.component";
-import { selectMonth } from "@primeuix/themes/aura/datepicker";
 import { CardModule } from "primeng/card";
 import { ChartModule } from 'primeng/chart';
 

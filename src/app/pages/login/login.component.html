@@ -1,9 +1,5 @@
-<app-header
-  title="Login Auth"
-  icon="pi pi-lock"
-  subTitle="Bem vindo (a)"
-  description="Acesse a sua conta para continuar"
-></app-header>
+<p-toast key="success"></p-toast>
+<p-toast key="error"></p-toast>
 
 <div class="fluid p-2">
 
@@ -38,7 +34,7 @@
           </div>
         </div>
         <div class="field col-12">
-          <p-button label="Acessar" fluid size="large" severity="primary" routerLink="/home"></p-button>
+          <p-button label="Acessar" fluid size="large" severity="primary" routerLink="/home" (onClick)="login()" [disabled]="!canLogin()"></p-button>
         </div>
       </div>
     </form>

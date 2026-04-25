@@ -13,15 +13,18 @@ import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { DialogModule } from "primeng/dialog";
 import { TableModule } from "primeng/table";
 import { ButtonModule } from "primeng/button";
-import { ExempleOneComponent } from "./entities/exempleOne/exempleOne.component";
 import { ToolbarModule } from "primeng/toolbar";
 import { MessageModule } from "primeng/message";
 import { CrudFormManagerComponent } from "./form/crud-form-manager/crud-form-manager.component";
 import { CrudFormComponent } from "./form/crud-form/crud-form.component";
 import { CardModule } from "primeng/card";
 import { InputTextModule } from "primeng/inputtext";
-import { ExempleTwoComponent } from "./entities/exempleTwo/exempleTwo.component";
 import { InputNumberModule } from "primeng/inputnumber";
+import { ProductComponent } from "./entities/product/product.component";
+import { DatePickerModule } from "primeng/datepicker";
+import { InputIconModule } from "primeng/inputicon";
+import { IconFieldModule } from "primeng/iconfield";
+import { FloatLabelModule } from "primeng/floatlabel";
 
 @NgModule({
   declarations: [
@@ -31,8 +34,7 @@ import { InputNumberModule } from "primeng/inputnumber";
     CrudFormManagerComponent,
     CrudFormComponent,
 
-    ExempleOneComponent,
-    ExempleTwoComponent,
+    ProductComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,11 @@ import { InputNumberModule } from "primeng/inputnumber";
     MessageModule,
     CardModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    DatePickerModule,
+    InputIconModule,
+    IconFieldModule,
+    FloatLabelModule
   ],
   providers: [
     MessageService,
