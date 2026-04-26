@@ -26,6 +26,8 @@ export class CrudListManagerComponent implements OnInit, AfterViewInit {
     private settingsService: SettingsService
   ) {
     this.entityName = this.activatedRoute.snapshot.params["entityName"];
+    this.settingsService.showHeader = false;
+    this.settingsService.showCards = false;
   }
   //#endregion
 

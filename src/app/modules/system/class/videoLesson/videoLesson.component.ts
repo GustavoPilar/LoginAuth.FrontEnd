@@ -2,6 +2,7 @@ import { AfterViewInit, Component, inject, OnDestroy, OnInit } from "@angular/co
 import { VideoLesson } from "../../../../models/entities";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { PrimeIcons } from "primeng/api";
+import { SettingsService } from "../../../../core/services/settings.service";
 
 @Component({
   selector: "app-video-lesson",
@@ -20,8 +21,11 @@ export class VideoLessonComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //#region Constructor
   constructor(
-
+    private settingsService: SettingsService
   ) {
+    this.settingsService.showCards = false;
+    
+    this.settingsService.UpdateHeader();
   }
   //#endregion
 

@@ -13,23 +13,16 @@ export class CrudComponent implements OnInit {
 
   //#region Fields
 
-  public manager: MenuItem;
+  // public manager: MenuItem;
 
   //#endregion
 
   //#region Constructor
   constructor(
     private menuService: MenuService,
-    private settingsService: SettingsService,
-    private router: Router
+    private settingsService: SettingsService
   ) {
-    this.settingsService.currentParentMenuItem = this.menuService.GetManager();
-    this.settingsService.currentMenuItems = this.settingsService.currentParentMenuItem.items!;
-
-    const current: MenuItem = this.settingsService.currentParentMenuItem;
-    this.settingsService.currentHeader = { title: current.label!, description: current.tooltip, icon: current.icon };
-
-    this.manager = this.menuService.GetManager();
+    this.settingsService.UpdateItems(this.menuService.GetManager());
   }
   //#endregion
 
@@ -37,16 +30,6 @@ export class CrudComponent implements OnInit {
 
   public ngOnInit(): void {
 
-  }
-
-  //#endregion
-
-  //#region Members :: navigateTo()
-
-  public navigateTo(routerLink: string): void {
-    let route: string = this.manager.routerLink + routerLink;
-
-    this.router.navigate([route]);
   }
 
   //#endregion

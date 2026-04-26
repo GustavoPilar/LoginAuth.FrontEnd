@@ -10,20 +10,44 @@ export class SettingsService {
     //#region Fields
 
     private _showMenu: boolean = true;
+    get showMenu(): boolean {
+        return this._showMenu;
+    }
 
     private _showHeader: boolean = true;
+    get showHeader(): boolean {
+        return this._showHeader;
+    }
 
     private _currentHeader?: AppHeader;
+    get currentHeader(): AppHeader | undefined {
+        return this._currentHeader;
+    }
 
     private _showCreatedBy: boolean = true;
+    get showCreatedBy(): boolean {
+        return this._showCreatedBy;
+    }
 
     private _showBreadCrumb: boolean = true;
+    get showBreadCrumb(): boolean {
+        return this._showBreadCrumb;
+    }
 
     private _showCards: boolean = true;
+    get showCards(): boolean {
+        return this._showCards;
+    }
 
     private _currentMenuItems: MenuItem[] = [];
+    get currentMenuItems(): MenuItem[] {
+        return this._currentMenuItems;
+    }
 
     private _currentParentMenuItem?: MenuItem;
+    get currentParentMenuItem(): MenuItem | undefined {
+        return this._currentParentMenuItem;
+    }
 
     //#region Constructor
     constructor() {
@@ -66,14 +90,20 @@ export class SettingsService {
 
     //#endregion
 
+    //#region Members 'Set'
+
+    public canShowMenu(value: boolean): void {
+        this._showMenu = value;
+    }
+
+    
+
+    //#endregion
+
     //#region Members 'ShowMenu' :: setShowMenu(), getShowMenu()
 
     set showMenu(value: boolean) {
         this._showMenu = value;
-    }
-
-    get showMenu(): boolean {
-        return this._showMenu;
     }
 
     //#endregion
@@ -84,9 +114,7 @@ export class SettingsService {
         this._showCreatedBy = value;
     }
 
-    get showCreatedBy(): boolean {
-        return this._showCreatedBy;
-    }
+
 
     //#endregion
 
@@ -96,9 +124,7 @@ export class SettingsService {
         this._showBreadCrumb = value;
     }
 
-    get showBreadCrumb(): boolean {
-        return this._showBreadCrumb;
-    }
+
 
     //#endregion
 
@@ -108,9 +134,7 @@ export class SettingsService {
         this._showCards = value;
     }
 
-    get showCards(): boolean {
-        return this._showCards;
-    }
+
 
     //#endregion
 
@@ -120,9 +144,7 @@ export class SettingsService {
         this._currentMenuItems = value;
     }
 
-    get currentMenuItems(): MenuItem[] {
-        return this._currentMenuItems;
-    }
+
 
     //#endregion
 
@@ -132,9 +154,7 @@ export class SettingsService {
         this._currentParentMenuItem = value;
     }
 
-    get currentParentMenuItem(): MenuItem | undefined {
-        return this._currentParentMenuItem;
-    }
+
 
     //#endregion
 
@@ -142,10 +162,6 @@ export class SettingsService {
 
     set showHeader(value: boolean) {
         this._showHeader = value;
-    }
-
-    get showHeader(): boolean {
-        return this._showHeader;
     }
 
     //#endregion
@@ -156,9 +172,6 @@ export class SettingsService {
         this._currentHeader = value;
     }
 
-    get currentHeader(): AppHeader | undefined {
-        return this._currentHeader;
-    }
 
     //#endregion
 

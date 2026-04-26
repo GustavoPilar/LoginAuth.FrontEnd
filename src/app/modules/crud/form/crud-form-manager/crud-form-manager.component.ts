@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PrimeIcons } from "primeng/api";
 import { CrudFormComponent } from "../crud-form/crud-form.component";
+import { SettingsService } from "../../../../core/services/settings.service";
 
 @Component({
   selector: "app-crud-form-manager",
@@ -22,10 +23,14 @@ export class CrudFormManagerComponent implements OnInit, AfterViewInit {
 
   //#region Constructor
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private settingsService: SettingsService
   ) {
     this.entityName = this.activatedRoute.snapshot.params["entityName"];
     this.entityId = this.activatedRoute.snapshot.params["entityId"];
+    
+    this.settingsService.showCards = false;
+    this.settingsService.showHeader = false;
   }
   //#endregion
 
